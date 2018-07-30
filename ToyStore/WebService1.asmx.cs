@@ -112,14 +112,14 @@ namespace ToyStore
         }
 
         [WebMethod]
-        public List<ArrayList> orderProducts(string ord, string key)//ord=desc || asc , order by key
+        public List<ArrayList> orderProducts(bool asc, string key) //order by key
         {
             List<ArrayList> products = new List<ArrayList>();
             ArrayList element = new ArrayList();
 
             connection.Open();
             command = connection.CreateCommand();
-            if(ord=="desc")
+            if(!asc)
             {
                 command.CommandText = "Select * From Products Order by "+key+" DESC";
             }
@@ -182,6 +182,94 @@ namespace ToyStore
 
         }
 
+        [WebMethod]
+
+        public List<ArrayList> filter(string productName, bool asc, string key, string productln)
+        {
+            List<ArrayList> products = new List<ArrayList>();
+            ArrayList element = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+
+            if(productName == null)
+            {
+                if (productln == "-")
+                {
+                    if (!asc)
+                    {
+                        command.CommandText = "Select * From Products Order by " + key + " DESC";
+                    }
+                    else
+                    {
+                        command.CommandText = "Select * From Products Order by " + key + " ASC";
+                    }
+                }
+                else
+                {
+                    if (!asc)
+                    {
+                        command.CommandText = "Select * From Products where  productLine ='" + productln + "'  Order by " + key + " DESC";
+                    }
+                    else
+                    {
+                        command.CommandText = "Select * From Products where productLine ='" + productln + "'  Order by " + key + " ASC";
+                    }
+                }
+            }
+
+            else
+            {
+                if (productln == "-")
+                {
+                    if (!asc)
+                    {
+                        command.CommandText = "Select * From Products where productCode in (select productCode from Products where productName Like'%" + productName + "%')  Order by " + key + " DESC";
+                    }
+                    else
+                    {
+                        command.CommandText = "Select * From Products where productCode in (select productCode from Products where productName Like'%" + productName + "%')  Order by " + key + " ASC";
+                    }
+                }
+                else
+                {
+                    if (!asc)
+                    {
+                        command.CommandText = "Select * From Products where (productCode in (select productCode from Products where productName Like'%" + productName + "%') and productLine ='" + productln + "')  Order by " + key + " DESC";
+                    }
+                    else
+                    {
+                        command.CommandText = "Select * From Products where (productCode in (select productCode from Products where productName Like'%" + productName + "%')and productLine ='" + productln + "')  Order by " + key + " ASC";
+                    }
+                }
+            }
+            
+
+            
+
+
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                element.Add(Convert.ToString(reader["productName"]));
+                element.Add(Convert.ToString(reader["productLine"]));
+                element.Add(Convert.ToString(reader["productScale"]));
+                element.Add(Convert.ToString(reader["productVendor"]));
+                element.Add(Convert.ToString(reader["productDescription"]));
+                element.Add(Convert.ToInt32(reader["quantityInStock"]));
+                element.Add(Convert.ToDouble(reader["buyPrice"]));
+                element.Add(Convert.ToDouble(reader["MSRP"]));
+                products.Add((ArrayList)element.Clone());
+                element.Clear();
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return products;
+        }
 
         [WebMethod]
         public bool AddToy(string productCode, string productName, string productLine, string productScale,string productVendor,string productDescription, int quantityInStock,double buyPrice, double MSRP)
