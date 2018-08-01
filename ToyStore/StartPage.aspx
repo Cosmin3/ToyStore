@@ -42,7 +42,7 @@
             <h1>Welcome to the Toystore</h1>
         </div>
         <p>
-        <asp:Label ID="Label1" runat="server" Text="e-mail:"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Telephone:"></asp:Label>
         <asp:TextBox ID="TextBox1" runat="server" Width="99px"></asp:TextBox>
         </p>
         <p>
@@ -50,8 +50,8 @@
             <asp:TextBox ID="TextBox2" runat="server" Width="99px"></asp:TextBox>
         </p>
         <p>
-            <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem>Customer</asp:ListItem>
+            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:ListItem Selected="True">Customer</asp:ListItem>
                 <asp:ListItem>Employee</asp:ListItem>
                 <asp:ListItem>Admin</asp:ListItem>
             </asp:DropDownList>
