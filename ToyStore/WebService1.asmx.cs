@@ -183,7 +183,6 @@ namespace ToyStore
         }
 
         [WebMethod]
-
         public List<ArrayList> filter(string productName, bool asc, string key, string productln)
         {
             List<ArrayList> products = new List<ArrayList>();
@@ -409,23 +408,23 @@ namespace ToyStore
 
 
         [WebMethod]
-        public bool deleteToy(string productCode)
+        public bool deleteToy(string productName)
         {
             connection.Open();
-            adapter = new SqlDataAdapter("SELECT * FROM Products ORDER BY productCode", connection);
+            adapter = new SqlDataAdapter("SELECT * FROM Products ORDER BY productName", connection);
 
             builder = new SqlCommandBuilder(adapter);
             DataSet dataSet = new DataSet();
             adapter.Fill(dataSet, "Products");
 
             DataColumn[] pk = new DataColumn[1];
-            pk[0] = dataSet.Tables["Products"].Columns["productCode"];
+            pk[0] = dataSet.Tables["Products"].Columns["productName"];
             dataSet.Tables["Products"].PrimaryKey = pk;
             DataRow caut = null;
             while (caut == null)
             {
 
-                caut = dataSet.Tables["Products"].Rows.Find(productCode);
+                caut = dataSet.Tables["Products"].Rows.Find(productName);
             }
 
             try
