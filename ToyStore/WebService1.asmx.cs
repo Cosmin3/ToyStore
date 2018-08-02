@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=LXPLAPTOP; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K2DSFB8\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -48,6 +48,25 @@ namespace ToyStore
             reader.Close();
             connection.Close();
             return products;
+
+        }
+
+        [WebMethod]
+        public string GetProductsCode(string productName, double buyPrice)
+        {
+            ArrayList products = new ArrayList();
+            string productCode;
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select productCode as Code From Products where productName='"+productName+"' and buyPrice ="+buyPrice;
+            reader = command.ExecuteReader();
+            reader.Read();
+             productCode =(Convert.ToString(reader["Code"]));
+
+
+            reader.Close();
+            connection.Close();
+            return productCode;
 
         }
 
