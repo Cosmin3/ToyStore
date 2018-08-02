@@ -28,7 +28,7 @@
             <asp:Label ID="Label1" runat="server" Text="Name"></asp:Label>
             <asp:Label ID="Label2" runat="server" Text="Price"></asp:Label>
            </p>
-       <asp:ListBox ID="ListBox1" runat="server" Height="130px" Width="286px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" ></asp:ListBox>
+       <asp:ListBox ID="ListBox1" runat="server" Height="130px" Width="286px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" AutoPostBack="True" ></asp:ListBox>
        
     </form>
 </body>
