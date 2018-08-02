@@ -16,7 +16,6 @@ namespace ToyStore
             string a = (string)(Session["selectedproduct"]);
             double b = (double)(Session["price"]);
             ArrayList arrayList = new ArrayList();
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + a + "');", true);
             arrayList=web.GetProductDetails(web.GetProductsCode(a, b));
             TextBox1.Text = web.GetProductsCode(a, b);
             TextBox2.Text =(string)arrayList[0];
