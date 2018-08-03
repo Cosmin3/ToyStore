@@ -22,23 +22,28 @@ namespace ToyStore
             
             if (!Page.IsPostBack)
             {
-                ListBox1.Items.Clear();
-
-                bool arg = true;
-                if (DropDownList2.SelectedItem.Text == "Descendent")
-                    arg = false;
-                else
-                    arg = true;
-                List<ArrayList> ts = new List<ArrayList>();
-                ts = web.filter("", arg, "buyPrice", "-");
-                foreach (ArrayList prod in ts)
-                {
-                    ListBox1.Items.Add(prod[0] + "..." + prod[6]);
-                }
-                DropDownList3.Items.Add("-");
-                foreach (String a in web.GetProductLine())
-                    DropDownList3.Items.Add(a);
+                this.refresh();
             }
+        }
+
+        private void refresh()
+        {
+            ListBox1.Items.Clear();
+
+            bool arg = true;
+            if (DropDownList2.SelectedItem.Text == "Descendent")
+                arg = false;
+            else
+                arg = true;
+            List<ArrayList> ts = new List<ArrayList>();
+            ts = web.filter("", arg, "buyPrice", "-");
+            foreach (ArrayList prod in ts)
+            {
+                ListBox1.Items.Add(prod[0] + "..." + prod[6]);
+            }
+            DropDownList3.Items.Add("-");
+            foreach (String a in web.GetProductLine())
+                DropDownList3.Items.Add(a);
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -54,6 +59,9 @@ namespace ToyStore
             }
 
             web.deleteToy(b);
+            this.refresh();
+
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)

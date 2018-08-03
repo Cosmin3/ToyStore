@@ -170,6 +170,41 @@ namespace ToyStore
         }
 
         [WebMethod]
+        public List<ArrayList> getProducts()
+        {
+            List<ArrayList> products = new List<ArrayList>();
+            ArrayList element = new ArrayList();
+
+            connection.Open();
+            command = connection.CreateCommand();
+
+                command.CommandText = "Select * From Products";
+
+
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                element.Add(Convert.ToString(reader["productCode"]));
+                element.Add(Convert.ToString(reader["productName"]));
+                element.Add(Convert.ToString(reader["productLine"]));
+                element.Add(Convert.ToString(reader["productScale"]));
+                element.Add(Convert.ToString(reader["productVendor"]));
+                element.Add(Convert.ToString(reader["productDescription"]));
+                element.Add(Convert.ToInt32(reader["quantityInStock"]));
+                element.Add(Convert.ToDouble(reader["buyPrice"]));
+                element.Add(Convert.ToDouble(reader["MSRP"]));
+                products.Add((ArrayList)element.Clone());
+                element.Clear();
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return products;
+
+        }
+
+        [WebMethod]
         public List<ArrayList> SearchProductByName(string productName)
         {
             List<ArrayList> products = new List<ArrayList>();
