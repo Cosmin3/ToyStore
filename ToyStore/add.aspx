@@ -45,7 +45,7 @@
                  <asp:Label ID="Label9" runat="server" Text="MSRP"></asp:Label>
                 <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
             </p>
-            <asp:Button ID="Button1" runat="server" Text="Add Product" />
+            <asp:Button ID="Button1" runat="server" Text="Add Product" OnClick="Button1_Click" />
         </div>
     </form>
 </body>

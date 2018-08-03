@@ -16,12 +16,29 @@ namespace ToyStore
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
                 Response.Redirect("modify.aspx");
+
             }
             ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
-           
-            DropDownList3.Items.Add("-");
-            foreach (String a in web.GetProductLine())
-                DropDownList3.Items.Add(a);
+            
+            if (!Page.IsPostBack)
+            {
+                ListBox1.Items.Clear();
+
+                bool arg = true;
+                if (DropDownList2.SelectedItem.Text == "Descendent")
+                    arg = false;
+                else
+                    arg = true;
+                List<ArrayList> ts = new List<ArrayList>();
+                ts = web.filter("", arg, "buyPrice", "-");
+                foreach (ArrayList prod in ts)
+                {
+                    ListBox1.Items.Add(prod[0] + "..." + prod[6]);
+                }
+                DropDownList3.Items.Add("-");
+                foreach (String a in web.GetProductLine())
+                    DropDownList3.Items.Add(a);
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -46,7 +63,24 @@ namespace ToyStore
 
         protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            String a = Convert.ToString(ListBox1.SelectedItem.Text);
+            bool ok = true;
+            String b = "", c = "";
+            for (int i = 0; i < a.Length && ok; i++)
+            {
+                if (a[i + 1] == '.' && a[i + 2] == '.' && a[i + 3] == '.')
+                    ok = false;
+                b = b + a[i];
+            }
+            ok = true;
+            for(int i=a.Length-1;i>0 && ok; i--)
+            {
+                if (a[i - 1] == '.' && a[i - 2] == '.')
+                    ok = false;
+                    c = a[i] + c;
+            }
+            Session["selectedproduct"] = b;
+            Session["price"] =Convert.ToDouble(c);
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -70,6 +104,11 @@ namespace ToyStore
         }
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

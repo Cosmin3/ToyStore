@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="modify.aspx.cs" Inherits="ToyStore.modify" %>
-
+<%@ PreviousPageType VirtualPath="~/padmin.aspx"%>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +11,7 @@
         <div>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Code"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Enabled="False"></asp:TextBox>
             </p>
             <p>
                  <asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
@@ -19,7 +19,8 @@
             </p>
             <p>
                  <asp:Label ID="Label3" runat="server" Text="Line"></asp:Label>
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                 <asp:DropDownList ID="DropDownList1" runat="server" Height="16px" Width="145px">
+                 </asp:DropDownList>
             </p>
             <p>
                  <asp:Label ID="Label4" runat="server" Text="Scale"></asp:Label>
@@ -45,7 +46,7 @@
                  <asp:Label ID="Label9" runat="server" Text="MSRP"></asp:Label>
                 <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
             </p>
-            <asp:Button ID="Button1" runat="server" Text="modify product" />
+            <asp:Button ID="Button1" runat="server" Text="modify product" OnClick="Button1_Click" />
         </div>
     </form>
 </body>
