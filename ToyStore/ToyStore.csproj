@@ -80,6 +80,7 @@
     <Content Include="StartPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="padmin.aspx" />
+    <Content Include="pcustomer.aspx" />
     <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,13 @@
     </Compile>
     <Compile Include="padmin.aspx.designer.cs">
       <DependentUpon>padmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pcustomer.aspx.cs">
+      <DependentUpon>pcustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pcustomer.aspx.designer.cs">
+      <DependentUpon>pcustomer.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
