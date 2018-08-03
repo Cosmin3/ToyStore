@@ -40,14 +40,14 @@
     <form id="form1" runat="server">
         <div>
             <h1>Welcome to the Toystore</h1>
-        </div>
         <p>
         <asp:Label ID="Label1" runat="server" Text="Telephone:"></asp:Label>
         <asp:TextBox ID="TextBox1" runat="server" Width="99px"></asp:TextBox>
         </p>
+        </div>
         <p>
             <asp:Label ID="Label2" runat="server" Text="Password:"></asp:Label>
-            <asp:TextBox ID="TextBox2" runat="server" Width="99px"></asp:TextBox>
+            <asp:TextBox ID="TextBox2" runat="server" Width="99px" style="margin-left: 26px"></asp:TextBox>
         </p>
         <p>
             <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
@@ -57,7 +57,7 @@
             </asp:DropDownList>
         </p>
         <asp:Button ID="Button1" runat="server" Text="login" Width="84px" OnClick="Button1_Click" />
-        <asp:Button ID="Button2" runat="server" Text="Proceed as guest" Width="117px" />
+        <asp:Button ID="Button2" runat="server" Text="Proceed as guest" Width="161px" />
     </form>
 </body>
 </html>
