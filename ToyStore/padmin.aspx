@@ -19,7 +19,7 @@
                 <asp:ListItem Value="True">Ascendent</asp:ListItem>
                 <asp:ListItem Value="False">Descendent</asp:ListItem>
                 </asp:DropDownList>
-            <asp:DropDownList ID="DropDownList3" runat="server"></asp:DropDownList>   
+            <asp:DropDownList ID="DropDownList3" runat="server" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged"></asp:DropDownList>   
             <asp:Button ID="Button3" runat="server" Text="search" OnClick="Button3_Click" />
             <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Button1_Click" />
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Remove" />

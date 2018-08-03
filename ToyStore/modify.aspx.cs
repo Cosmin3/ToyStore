@@ -21,7 +21,12 @@ namespace ToyStore
                 arrayList = web.GetProductDetails(web.GetProductsCode(a, b));
                 TextBox1.Text = web.GetProductsCode(a, b);
                 TextBox2.Text = (string)arrayList[0];
-                TextBox3.Text = (string)arrayList[1];
+                DropDownList1.Items.Add(Convert.ToString(arrayList[1]));
+                foreach (String c in web.GetProductLine())
+                {
+                    if(c!=Convert.ToString(arrayList[1]))
+                    DropDownList1.Items.Add(c);
+                }
                 TextBox4.Text = (string)arrayList[2];
                 TextBox5.Text = (string)arrayList[3];
                 TextBox6.Text = (string)arrayList[4];
@@ -34,7 +39,7 @@ namespace ToyStore
         protected void Button1_Click(object sender, EventArgs e)
         {
             bool update;
-            update = web.UpdateToy(TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, Convert.ToInt32(TextBox7.Text), Convert.ToDouble(TextBox8.Text), Convert.ToDouble(TextBox9.Text));
+            update = web.UpdateToy(TextBox1.Text, TextBox2.Text, DropDownList1.SelectedItem.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, Convert.ToInt32(TextBox7.Text), Convert.ToDouble(TextBox8.Text), Convert.ToDouble(TextBox9.Text));
             if(update)
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Produs modificat " + "');", true);
             else
