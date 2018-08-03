@@ -11,7 +11,7 @@
         <div>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Code"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Enabled="False"></asp:TextBox>
             </p>
             <p>
                  <asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
@@ -19,7 +19,8 @@
             </p>
             <p>
                  <asp:Label ID="Label3" runat="server" Text="Line"></asp:Label>
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                 <asp:DropDownList ID="DropDownList1" runat="server" Height="16px" Width="145px">
+                 </asp:DropDownList>
             </p>
             <p>
                  <asp:Label ID="Label4" runat="server" Text="Scale"></asp:Label>

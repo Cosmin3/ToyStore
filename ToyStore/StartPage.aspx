@@ -39,7 +39,7 @@
            padding:10px;
            
        }
-       }
+       
        #TextBox1{
            margin:auto;
        }
