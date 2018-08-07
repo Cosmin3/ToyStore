@@ -72,7 +72,14 @@ namespace ToyStore
 
                         update = web.UpdateToy(TextBox1.Text, TextBox2.Text, DropDownList1.SelectedItem.Text, TextBox4.Text, TextBox5.Text,TextBox6.Text, Convert.ToInt32(TextBox7.Text), Convert.ToDouble(TextBox8.Text), Convert.ToDouble(TextBox9.Text));
                         if (update)
+                        {
                             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Produs modificat " + "');", true);
+                            if((string)Session["LoggedUser"]=="admin")
+                                Response.Redirect("padmin.aspx");
+                            else
+                                Response.Redirect("productsEmployee.aspx");
+
+                        }
                         else
                             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "eroare in timpul modificarii " + "');", true);
 

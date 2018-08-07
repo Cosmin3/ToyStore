@@ -28,7 +28,13 @@ namespace ToyStore
             else if (DropDownList1.Text == "Employee")
             {
                 if (web.checkLogInEmp(TextBox1.Text, TextBox2.Text))
+                {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
+                    Session["LoggedUser"] = TextBox2.Text;
+                    Session["UserName"] = TextBox1.Text;
+                    Response.Redirect("productsEmployee.aspx");
+                }
+                    
                 else
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Eroare" + "');", true);
             }
@@ -37,6 +43,7 @@ namespace ToyStore
                 if (web.checkLogInAdmin(TextBox1.Text, TextBox2.Text))
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
+                    Session["LoggedUser"] = "admin";
                     Response.Redirect("padmin.aspx");
                 }
                 else
