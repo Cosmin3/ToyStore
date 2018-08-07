@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=GAMMAR; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K2DSFB8\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -558,6 +558,93 @@ namespace ToyStore
                 Console.WriteLine("Error: 0" + ex);
                 return false;
             }
+        }
+
+
+        [WebMethod]
+        public bool addCustomer(int employeeNumber, string customerName, string contactLastName, string contactFirstName, string phone, string addressLine1, string addressLine2, string city, string state, string postalCode, string country, double creditLimit)
+        {
+            
+            
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select top (1) customerNumber from Customers order by customerNumber desc";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int lastCode = Convert.ToInt32(reader["customerNumber"]);
+
+            reader.Close();
+            connection.Close();
+
+            
+                adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
+                commandBuilder = new SqlCommandBuilder(adapter);
+                DataSet dataSet = new DataSet();
+                adapter.Fill(dataSet, "Customers");
+                DataRow dataRow = dataSet.Tables["Customers"].NewRow();
+                dataRow["customerNumber"] = lastCode+1;
+                dataRow["customerName"] = customerName;
+                dataRow["contactLastName"] = contactLastName;
+                dataRow["contactFirstName"] = contactFirstName;
+                dataRow["phone"] = phone;
+                dataRow["addressLine1"] = addressLine1;
+                dataRow["addressLine2"] = addressLine2;
+                dataRow["city"] = city;
+                dataRow["state"] = state;
+            dataRow["postalCode"] = postalCode;
+            dataRow["country"] = country;
+            dataRow["salesRepEmployeeNumber"] = employeeNumber;
+            dataRow["creditLimit"] = creditLimit;
+
+            dataSet.Tables["Customers"].Rows.Add(dataRow);
+                try
+                {
+                    adapter.Update(dataSet, "Customers");
+                    return true;
+
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
+                    return false;
+                }
+           
+        }
+
+        [WebMethod]
+        public ArrayList getEmployeeDetails(int employeeNumber)
+        {
+            ArrayList employee = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select * From Employees where employeeNumber='" + employeeNumber + "'";
+            reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+
+                
+                employee.Add(Convert.ToInt32(reader["employeeNumber"]));
+                employee.Add(Convert.ToString(reader["lastName"]));
+                employee.Add(Convert.ToString(reader["firstName"]));
+                employee.Add(Convert.ToString(reader["extension"]));
+                employee.Add(Convert.ToString(reader["email"]));
+                employee.Add(Convert.ToString(reader["officeCode"]));
+                employee.Add(Convert.ToInt32(reader["reportsTo"]));
+                employee.Add(Convert.ToString(reader["jobTitle"]));
+
+
+                reader.Close();
+                connection.Close();
+
+                return employee;
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return null;
         }
 
     }
