@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="add.aspx" />
+    <Content Include="EmpCustDet.aspx" />
+    <Content Include="EmployeeCust.aspx" />
     <Content Include="modify.aspx" />
     <Content Include="productsEmployee.aspx" />
     <Content Include="StartPage.aspx" />
@@ -91,6 +93,20 @@
     </Compile>
     <Compile Include="add.aspx.designer.cs">
       <DependentUpon>add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmpCustDet.aspx.cs">
+      <DependentUpon>EmpCustDet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpCustDet.aspx.designer.cs">
+      <DependentUpon>EmpCustDet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeCust.aspx.cs">
+      <DependentUpon>EmployeeCust.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeCust.aspx.designer.cs">
+      <DependentUpon>EmployeeCust.aspx</DependentUpon>
     </Compile>
     <Compile Include="modify.aspx.cs">
       <DependentUpon>modify.aspx</DependentUpon>

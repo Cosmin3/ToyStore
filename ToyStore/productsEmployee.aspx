@@ -14,13 +14,22 @@
            display:inline-block;
            text-align:center;
         }
+        .topButton{
+            float: right;
+
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         
         <div>
-            <p> <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label></p>
+            <p> <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
+                
+            </p>
+            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="New Orders" />
+                <asp:Button ID="Button5" class="topButton" runat="server" Text="My Customers" OnClick="Button5_Click" />
+                </p>
              <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             <p>
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>

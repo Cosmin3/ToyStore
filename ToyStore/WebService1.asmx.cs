@@ -647,5 +647,99 @@ namespace ToyStore
             return null;
         }
 
+        [WebMethod]
+        public ArrayList getCustomersForEmployee(int employeeNumber)
+        {
+            ArrayList customers = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select customerName as Name From Customers where salesRepEmployeeNumber='" + employeeNumber +"'";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                customers.Add(Convert.ToString(reader["Name"]));
+            }
+
+            reader.Close();
+            connection.Close();
+            return customers;
+        }
+
+
+        [WebMethod]
+        public List<ArrayList> getOrdersForCustomer(int customerNumber)
+        {
+            List<ArrayList> orders = new List<ArrayList>();
+            ArrayList order = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber, status From Orders where customerNumber='" + customerNumber + "'";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                order.Add(Convert.ToString(reader["orderNumber"]));
+                order.Add(Convert.ToString(reader["status"]));
+                orders.Add((ArrayList)order.Clone());
+                order.Clear();
+            }
+
+            reader.Close();
+            connection.Close();
+            return orders;
+        }
+
+        [WebMethod]
+        public int getCustomerNumber(string customerName)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select customerNumber as number From Customers where CustomerName='" +customerName+ "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int number = Convert.ToInt32(reader["number"]);
+            reader.Close();
+            connection.Close();
+            return number;
+
+        }
+
+        [WebMethod]
+        public ArrayList getCustomerDetails(int customerNumber)
+        {
+            ArrayList customer = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select * From Customers where customerNumber='" + customerNumber + "'";
+            reader = command.ExecuteReader();
+            if (reader.Read())
+            {          
+                customer.Add(Convert.ToInt32(reader["customerNumber"]));
+                customer.Add(Convert.ToString(reader["customerName"]));
+                customer.Add(Convert.ToString(reader["contactLastName"]));
+                customer.Add(Convert.ToString(reader["contactFirstName"]));
+                customer.Add(Convert.ToString(reader["phone"]));
+                customer.Add(Convert.ToString(reader["addressLine1"]));
+                customer.Add(Convert.ToString(reader["addressLine2"]));
+                customer.Add(Convert.ToString(reader["city"]));
+                customer.Add(Convert.ToString(reader["state"]));
+                customer.Add(Convert.ToString(reader["postalCode"]));
+                customer.Add(Convert.ToString(reader["country"]));
+                customer.Add(Convert.ToInt32(reader["salesRepEmployeeNumber"]));
+                customer.Add(Convert.ToDouble(reader["creditLimit"]));
+
+
+                reader.Close();
+                connection.Close();
+
+                return customer;
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return null;
+        }
     }
 }
