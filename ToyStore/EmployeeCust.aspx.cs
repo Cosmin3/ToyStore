@@ -38,5 +38,10 @@ namespace ToyStore
         {
 
         }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("productsEmployee.aspx");
+        }
     }
 }

@@ -21,7 +21,11 @@ namespace ToyStore
             if (DropDownList1.Text == "Customer")
             {
                 if (web.checkLogInCust(TextBox1.Text, TextBox2.Text))
+                {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
+                    Session["CustomerNr"] = TextBox2.Text;
+                    Response.Redirect("Customer.aspx");
+                }
                 else
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Eroare" + "');", true);
             }
