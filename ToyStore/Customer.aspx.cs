@@ -15,7 +15,7 @@ namespace ToyStore
         {
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
-                Response.Redirect("modify.aspx");
+                Response.Redirect("productDetails.aspx");
             }
             ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
 
@@ -97,7 +97,7 @@ namespace ToyStore
 
         protected void Button6_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("order.aspx");
         }
     }
 }

@@ -68,5 +68,10 @@ namespace ToyStore
             else 
                 Label1.Text = "Username:";
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("pcustomer.aspx");
+        }
     }
 }

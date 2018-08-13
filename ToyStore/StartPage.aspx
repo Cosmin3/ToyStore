@@ -72,7 +72,7 @@
         </p>
             <p>
         <asp:Button ID="Button1" runat="server" Text="login" Width="107px" OnClick="Button1_Click" />
-        <asp:Button ID="Button2" runat="server" Text="Proceed as guest" Width="131px" />
+        <asp:Button ID="Button2" runat="server" Text="Proceed as guest" Width="131px" OnClick="Button2_Click" />
                 </p>
             </div>
     </form>

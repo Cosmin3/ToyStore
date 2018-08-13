@@ -23,13 +23,14 @@ namespace ToyStore
             if (!Page.IsPostBack)
             {
                 this.refresh();
+                this.Label4.Text = "Welcome: " + Session["LoggedUser"];
             }
         }
 
         private void refresh()
         {
             ListBox1.Items.Clear();
-
+            DropDownList3.Items.Clear();
             bool arg = true;
             if (DropDownList2.SelectedItem.Text == "Descendent")
                 arg = false;
@@ -119,6 +120,12 @@ namespace ToyStore
         protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Session["LoggedUser"] = "";
+            Response.Redirect("StartPage.aspx");
         }
     }
 }

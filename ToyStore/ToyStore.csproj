@@ -80,6 +80,8 @@
     <Content Include="EmpCustDet.aspx" />
     <Content Include="EmployeeCust.aspx" />
     <Content Include="modify.aspx" />
+    <Content Include="order.aspx" />
+    <Content Include="productDetails.aspx" />
     <Content Include="productsEmployee.aspx" />
     <Content Include="StartPage.aspx" />
     <Content Include="Web.config" />
@@ -122,6 +124,20 @@
     </Compile>
     <Compile Include="modify.aspx.designer.cs">
       <DependentUpon>modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="order.aspx.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="order.aspx.designer.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productDetails.aspx.cs">
+      <DependentUpon>productDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productDetails.aspx.designer.cs">
+      <DependentUpon>productDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="productsEmployee.aspx.cs">
       <DependentUpon>productsEmployee.aspx</DependentUpon>
