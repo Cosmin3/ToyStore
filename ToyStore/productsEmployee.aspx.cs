@@ -135,5 +135,10 @@ namespace ToyStore
         {
             Response.Redirect("EmployeeCust.aspx");
         }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EmpPendingOrders.aspx");
+        }
     }
 }
