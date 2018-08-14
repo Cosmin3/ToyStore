@@ -27,7 +27,7 @@
             <p> <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
                 
             </p>
-            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="New Orders" />
+            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="Pending Orders" OnClick="Button6_Click" />
                 <asp:Button ID="Button5" class="topButton" runat="server" Text="My Customers" OnClick="Button5_Click" />
                 </p>
              <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>

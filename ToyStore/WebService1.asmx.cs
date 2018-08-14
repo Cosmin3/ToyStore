@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=LXPLAPTOP; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K2DSFB8\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -740,6 +740,29 @@ namespace ToyStore
             connection.Close();
 
             return null;
+        }
+
+
+        [WebMethod]
+        public ArrayList empPendingOrders(int empNumber)
+        {
+            ArrayList orders = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber from Orders where (customerNumber in (Select customerNumber from customers where salesRepEmployeeNumber = '"+empNumber+"') and status = 'Pending')";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                orders.Add(Convert.ToInt32(reader["orderNumber"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return orders;
+
         }
         [WebMethod]
         public bool addOrder(ArrayList arrayList,bool arg)
