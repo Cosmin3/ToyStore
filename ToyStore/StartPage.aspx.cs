@@ -24,6 +24,7 @@ namespace ToyStore
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
                     Session["CustomerNr"] = TextBox2.Text;
+                    Session["loggedUser"] = "customer";
                     Response.Redirect("Customer.aspx");
                 }
                 else

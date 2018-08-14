@@ -27,7 +27,7 @@
             <p> <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
                 
             </p>
-            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="Place Order" OnClick="Button6_Click" />
+            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="Cart" OnClick="Button6_Click" />
                 </p>
              <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             <p>
@@ -48,6 +48,11 @@
             <asp:Label ID="Label2" runat="server" Text="Price"></asp:Label>
            </p>
        <asp:ListBox ID="ListBox1" runat="server" Height="130px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" AutoPostBack="True" ></asp:ListBox>
+       
+            
+       
+             <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="69px"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Add to cart" style="margin-left: 7px" OnClick="Button1_Click" />
        
             
        

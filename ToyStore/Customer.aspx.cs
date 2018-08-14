@@ -10,6 +10,7 @@ namespace ToyStore
 {
     public partial class Customer : System.Web.UI.Page
     {
+        bool arg = true;
         WebService1 web = new WebService1();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -73,6 +74,7 @@ namespace ToyStore
             }
             Session["selectedproduct"] = b;
             Session["price"] = Convert.ToDouble(c);
+
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -98,6 +100,22 @@ namespace ToyStore
         protected void Button6_Click(object sender, EventArgs e)
         {
             Response.Redirect("order.aspx");
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            ArrayList ts = new ArrayList();
+            ts.Add(Session["selectedproduct"]);
+            ts.Add(Convert.ToInt32(TextBox2.Text));
+            if (web.addOrder(ts,arg))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Product added to cart" + "');", true);
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Error while adding to cart" + "');", true);
+            }
+            arg = false;
         }
     }
 }

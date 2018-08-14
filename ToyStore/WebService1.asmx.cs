@@ -741,5 +741,47 @@ namespace ToyStore
 
             return null;
         }
+        [WebMethod]
+        public bool addOrder(ArrayList arrayList,bool arg)
+        {
+                connection.Open();
+                command = connection.CreateCommand();
+                command.CommandText = "Select top (1) orderNumber from Orders order by orderNumber desc";
+                reader = command.ExecuteReader();
+                reader.Read();
+                int lastCode = Convert.ToInt32(reader["orderNumber"]);
+                reader.Close();
+                connection.Close();
+            adapter = new SqlDataAdapter("SELECT * FROM OrderDetails", connection);
+            commandBuilder = new SqlCommandBuilder(adapter);
+            DataSet dataSet = new DataSet();
+            adapter.Fill(dataSet, "OrderDetails");
+            DataRow dataRow = dataSet.Tables["OrderDetails"].NewRow();
+            dataRow["orderNumber"] = lastCode + Convert.ToInt32(arg);
+            dataRow["productCode"] = this.GetProductsCode(Convert.ToString(arrayList[0]),Convert.ToDouble( Session["price"]));
+            dataRow["quantityOrdered"] = arrayList[1];
+            dataRow["priceEach"] = Session["price"];
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select top (1) orderLineNumber from OrderDetails where orderNumber="+lastCode+" order by orderLineNumber desc";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int lineCode = Convert.ToInt32(reader["orderLineNumber"]);
+            reader.Close();
+            connection.Close();
+            dataRow["orderLineNumber"] = lineCode+1;
+            dataSet.Tables["OrderDetails"].Rows.Add(dataRow);
+           try
+            {
+                adapter.Update(dataSet, "OrderDetails");
+                return true;
+
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
+                return false;
+            }
+        }
     }
 }
