@@ -79,6 +79,7 @@
     <Content Include="Customer.aspx" />
     <Content Include="EmpCustDet.aspx" />
     <Content Include="EmployeeCust.aspx" />
+    <Content Include="EmployeeOrderNegociate.aspx" />
     <Content Include="EmpPendingOrders.aspx" />
     <Content Include="modify.aspx" />
     <Content Include="order.aspx" />
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="EmployeeCust.aspx.designer.cs">
       <DependentUpon>EmployeeCust.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeOrderNegociate.aspx.cs">
+      <DependentUpon>EmployeeOrderNegociate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeOrderNegociate.aspx.designer.cs">
+      <DependentUpon>EmployeeOrderNegociate.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmpPendingOrders.aspx.cs">
       <DependentUpon>EmpPendingOrders.aspx</DependentUpon>

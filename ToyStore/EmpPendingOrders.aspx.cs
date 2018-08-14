@@ -12,6 +12,13 @@ namespace ToyStore
         WebService1 web = new WebService1();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
+            {
+                Session["Order"] = ListBox1.SelectedItem.Text;
+                Response.Redirect("EmployeeOrderNegociate.aspx");
+            }
+            ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
+
             if (!Page.IsPostBack)
             {
                 this.Label4.Text = "Welcome: " + Session["UserName"];
