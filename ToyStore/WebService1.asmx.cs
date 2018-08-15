@@ -806,5 +806,65 @@ namespace ToyStore
                 return false;
             }
         }
+        [WebMethod]
+        public ArrayList getOrderDetails(int orderNumber)
+        {
+
+
+            ArrayList products = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT productName as name from products where productCode in (select productCode from OrderDetails where orderNumber =" + orderNumber+")";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                products.Add(Convert.ToString(reader["name"]));
+
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return products;
+
+
+
+        }
+
+        [WebMethod]
+        public ArrayList getOrderProductDetails(int orderNumber, string productCode)
+        {
+
+
+            ArrayList product = new ArrayList();
+
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT p.productName as name, p.quantityInStock as instock, o.priceEach as price, o.quantityOrdered as ordered from OrderDetails o join Products p on o.productCode = p.productCode where o.orderNumber =" + orderNumber + "and p.productCode='"+productCode+"'";
+            reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                product.Add(Convert.ToString(reader["name"]));
+                product.Add(Convert.ToInt32(reader["instock"]));
+                product.Add(Convert.ToDouble(reader["price"]));
+                product.Add(Convert.ToInt32(reader["ordered"]));
+
+                reader.Close();
+                connection.Close();
+
+                return product;
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return null;
+
+
+
+        }
     }
 }
