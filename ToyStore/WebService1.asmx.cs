@@ -51,6 +51,24 @@ namespace ToyStore
 
         }
         [WebMethod]
+        public string GetProductsCode2(string productName)
+        {
+            ArrayList products = new ArrayList();
+            string productCode;
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select productCode as Code From Products where productName='" + productName + "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            productCode = (Convert.ToString(reader["Code"]));
+
+
+            reader.Close();
+            connection.Close();
+            return productCode;
+
+        }
+        [WebMethod]
         public ArrayList GetProductsName()
         {
             ArrayList products = new ArrayList();
@@ -865,6 +883,63 @@ namespace ToyStore
 
 
 
+        }
+
+        [WebMethod]
+         public bool acceptOrder(string productCode, int newQuant)
+        {
+            ArrayList productList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select productCode as Code From Products order by productCode";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                productList.Add(Convert.ToString(reader["Code"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in productList)
+            {
+                if (productCode == slist)
+                    ok = 1;
+                if (productCode != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Products order by productCode", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Products");
+
+
+            dataset.Tables["Products"].Rows[row]["quantityInStock"] = newQuant;
+            
+
+            try
+            {
+
+                adapter.Update(dataset, "Products");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
         }
     }
 }
