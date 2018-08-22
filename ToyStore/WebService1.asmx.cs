@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-K2DSFB8\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -941,5 +941,64 @@ namespace ToyStore
                 return false;
             }
         }
+        [WebMethod]
+        public bool EmpToCustOffer(string orderNumber)
+        {
+            ArrayList orderList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber From Orders order by orderNumber";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                orderList.Add(Convert.ToString(reader["orderNumber"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in orderList)
+            {
+                if (orderNumber == slist)
+                    ok = 1;
+                if (orderNumber != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Orders order by orderNumber", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Orders");
+
+
+            dataset.Tables["Orders"].Rows[row]["status"] = "Renegociate";
+
+
+            try
+            {
+
+                adapter.Update(dataset, "Orders");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
+
+
+        }
+
     }
 }
