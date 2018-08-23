@@ -78,7 +78,7 @@ namespace ToyStore
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                products.Add(Convert.ToString(reader["Name"]));       
+                products.Add(Convert.ToString(reader["Name"]));
             }
 
             reader.Close();
@@ -86,11 +86,11 @@ namespace ToyStore
             return products;
 
         }
-         
+
         [WebMethod]
         public List<ArrayList> GetProductsNamePrice()
         {
-            List<ArrayList> products=new List<ArrayList>();
+            List<ArrayList> products = new List<ArrayList>();
             ArrayList element = new ArrayList();
 
             connection.Open();
@@ -109,18 +109,18 @@ namespace ToyStore
             connection.Close();
 
             return products;
-            
+
         }
 
         [WebMethod]
         public ArrayList GetProductDetails(string productCode)
         {
             ArrayList product = new ArrayList();
-            
+
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select * From Products where productCode='"+productCode+"'";
+            command.CommandText = "Select * From Products where productCode='" + productCode + "'";
             reader = command.ExecuteReader();
             if (reader.Read())
             {
@@ -155,13 +155,13 @@ namespace ToyStore
 
             connection.Open();
             command = connection.CreateCommand();
-            if(!asc)
+            if (!asc)
             {
-                command.CommandText = "Select * From Products Order by "+key+" DESC";
+                command.CommandText = "Select * From Products Order by " + key + " DESC";
             }
             else
             {
-                command.CommandText = "Select * From Products Order by " + key + " ASC" ;
+                command.CommandText = "Select * From Products Order by " + key + " ASC";
             }
 
             reader = command.ExecuteReader();
@@ -195,7 +195,7 @@ namespace ToyStore
             connection.Open();
             command = connection.CreateCommand();
 
-                command.CommandText = "Select * From Products";
+            command.CommandText = "Select * From Products";
 
 
             reader = command.ExecuteReader();
@@ -230,7 +230,7 @@ namespace ToyStore
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select * From Products where productCode in (select productCode from Products where productName Like'%"+productName+"%')";
+            command.CommandText = "Select * From Products where productCode in (select productCode from Products where productName Like'%" + productName + "%')";
             reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -263,7 +263,7 @@ namespace ToyStore
             connection.Open();
             command = connection.CreateCommand();
 
-            if(productName == null)
+            if (productName == null)
             {
                 if (productln == "-")
                 {
@@ -314,9 +314,9 @@ namespace ToyStore
                     }
                 }
             }
-            
 
-            
+
+
 
 
 
@@ -342,7 +342,7 @@ namespace ToyStore
         }
 
         [WebMethod]
-        public bool AddToy(string productCode, string productName, string productLine, string productScale,string productVendor,string productDescription, int quantityInStock,double buyPrice, double MSRP)
+        public bool AddToy(string productCode, string productName, string productLine, string productScale, string productVendor, string productDescription, int quantityInStock, double buyPrice, double MSRP)
         {
             bool valid = true;
             ArrayList Codes = new ArrayList();
@@ -360,7 +360,7 @@ namespace ToyStore
 
             foreach (string code in Codes)
             {
-                if(code==productCode)
+                if (code == productCode)
                 {
                     valid = false;
                 }
@@ -468,12 +468,12 @@ namespace ToyStore
         [WebMethod]
         public bool checkLogInAdmin(string user, string pass)
         {
-            
-                if ((user=="admin") && (pass=="admin"))
-                {
-                    return true;
-                }
-            
+
+            if ((user == "admin") && (pass == "admin"))
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -582,8 +582,8 @@ namespace ToyStore
         [WebMethod]
         public bool addCustomer(int employeeNumber, string customerName, string contactLastName, string contactFirstName, string phone, string addressLine1, string addressLine2, string city, string state, string postalCode, string country, double creditLimit)
         {
-            
-            
+
+
             connection.Open();
             command = connection.CreateCommand();
             command.CommandText = "Select top (1) customerNumber from Customers order by customerNumber desc";
@@ -594,39 +594,39 @@ namespace ToyStore
             reader.Close();
             connection.Close();
 
-            
-                adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
-                commandBuilder = new SqlCommandBuilder(adapter);
-                DataSet dataSet = new DataSet();
-                adapter.Fill(dataSet, "Customers");
-                DataRow dataRow = dataSet.Tables["Customers"].NewRow();
-                dataRow["customerNumber"] = lastCode+1;
-                dataRow["customerName"] = customerName;
-                dataRow["contactLastName"] = contactLastName;
-                dataRow["contactFirstName"] = contactFirstName;
-                dataRow["phone"] = phone;
-                dataRow["addressLine1"] = addressLine1;
-                dataRow["addressLine2"] = addressLine2;
-                dataRow["city"] = city;
-                dataRow["state"] = state;
+
+            adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
+            commandBuilder = new SqlCommandBuilder(adapter);
+            DataSet dataSet = new DataSet();
+            adapter.Fill(dataSet, "Customers");
+            DataRow dataRow = dataSet.Tables["Customers"].NewRow();
+            dataRow["customerNumber"] = lastCode + 1;
+            dataRow["customerName"] = customerName;
+            dataRow["contactLastName"] = contactLastName;
+            dataRow["contactFirstName"] = contactFirstName;
+            dataRow["phone"] = phone;
+            dataRow["addressLine1"] = addressLine1;
+            dataRow["addressLine2"] = addressLine2;
+            dataRow["city"] = city;
+            dataRow["state"] = state;
             dataRow["postalCode"] = postalCode;
             dataRow["country"] = country;
             dataRow["salesRepEmployeeNumber"] = employeeNumber;
             dataRow["creditLimit"] = creditLimit;
 
             dataSet.Tables["Customers"].Rows.Add(dataRow);
-                try
-                {
-                    adapter.Update(dataSet, "Customers");
-                    return true;
+            try
+            {
+                adapter.Update(dataSet, "Customers");
+                return true;
 
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
-                    return false;
-                }
-           
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
+                return false;
+            }
+
         }
 
         [WebMethod]
@@ -642,7 +642,7 @@ namespace ToyStore
             if (reader.Read())
             {
 
-                
+
                 employee.Add(Convert.ToInt32(reader["employeeNumber"]));
                 employee.Add(Convert.ToString(reader["lastName"]));
                 employee.Add(Convert.ToString(reader["firstName"]));
@@ -671,7 +671,7 @@ namespace ToyStore
             ArrayList customers = new ArrayList();
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select customerName as Name From Customers where salesRepEmployeeNumber='" + employeeNumber +"'";
+            command.CommandText = "Select customerName as Name From Customers where salesRepEmployeeNumber='" + employeeNumber + "'";
             reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -711,7 +711,7 @@ namespace ToyStore
         {
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select customerNumber as number From Customers where CustomerName='" +customerName+ "'";
+            command.CommandText = "Select customerNumber as number From Customers where CustomerName='" + customerName + "'";
             reader = command.ExecuteReader();
             reader.Read();
             int number = Convert.ToInt32(reader["number"]);
@@ -732,7 +732,7 @@ namespace ToyStore
             command.CommandText = "Select * From Customers where customerNumber='" + customerNumber + "'";
             reader = command.ExecuteReader();
             if (reader.Read())
-            {          
+            {
                 customer.Add(Convert.ToInt32(reader["customerNumber"]));
                 customer.Add(Convert.ToString(reader["customerName"]));
                 customer.Add(Convert.ToString(reader["contactLastName"]));
@@ -769,7 +769,7 @@ namespace ToyStore
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select orderNumber from Orders where (customerNumber in (Select customerNumber from customers where salesRepEmployeeNumber = '"+empNumber+"') and status = 'Pending')";
+            command.CommandText = "Select orderNumber from Orders where (customerNumber in (Select customerNumber from customers where salesRepEmployeeNumber = '" + empNumber + "') and status = 'Pending')";
             reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -783,45 +783,45 @@ namespace ToyStore
 
         }
         [WebMethod]
-        public bool addOrder(ArrayList arrayList,bool arg)
+        public int addOrder(ArrayList arrayList, bool arg)
         {
-                connection.Open();
-                command = connection.CreateCommand();
-                command.CommandText = "Select top (1) orderNumber from Orders order by orderNumber desc";
-                reader = command.ExecuteReader();
-                reader.Read();
-                int lastCode = Convert.ToInt32(reader["orderNumber"]);
-                reader.Close();
-                connection.Close();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select top (1) orderNumber from OrderDetails order by orderNumber desc";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int lastCode = Convert.ToInt32(reader["orderNumber"]);
+            reader.Close();
+            connection.Close();
             adapter = new SqlDataAdapter("SELECT * FROM OrderDetails", connection);
             commandBuilder = new SqlCommandBuilder(adapter);
             DataSet dataSet = new DataSet();
             adapter.Fill(dataSet, "OrderDetails");
             DataRow dataRow = dataSet.Tables["OrderDetails"].NewRow();
             dataRow["orderNumber"] = lastCode + Convert.ToInt32(arg);
-            dataRow["productCode"] = this.GetProductsCode(Convert.ToString(arrayList[0]),Convert.ToDouble( Session["price"]));
+            dataRow["productCode"] = this.GetProductsCode(Convert.ToString(arrayList[0]), Convert.ToDouble(Session["price"]));
             dataRow["quantityOrdered"] = arrayList[1];
-            dataRow["priceEach"] = Session["price"];
+            dataRow["priceEach"] = arrayList[2];
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "Select top (1) orderLineNumber from OrderDetails where orderNumber="+lastCode+" order by orderLineNumber desc";
+            command.CommandText = "Select top (1) orderLineNumber from OrderDetails where orderNumber=" + lastCode + " order by orderLineNumber desc";
             reader = command.ExecuteReader();
             reader.Read();
             int lineCode = Convert.ToInt32(reader["orderLineNumber"]);
             reader.Close();
             connection.Close();
-            dataRow["orderLineNumber"] = lineCode+1;
+            dataRow["orderLineNumber"] = lineCode + 1;
             dataSet.Tables["OrderDetails"].Rows.Add(dataRow);
-           try
+            try
             {
                 adapter.Update(dataSet, "OrderDetails");
-                return true;
+                return Convert.ToInt32(dataRow["orderNumber"]);
 
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
-                return false;
+                return 0;
             }
         }
         [WebMethod]
@@ -834,7 +834,7 @@ namespace ToyStore
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT productName as name from products where productCode in (select productCode from OrderDetails where orderNumber =" + orderNumber+")";
+            command.CommandText = "SELECT productName as name from products where productCode in (select productCode from OrderDetails where orderNumber =" + orderNumber + ")";
             reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -861,7 +861,7 @@ namespace ToyStore
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT p.productName as name, p.quantityInStock as instock, o.priceEach as price, o.quantityOrdered as ordered from OrderDetails o join Products p on o.productCode = p.productCode where o.orderNumber =" + orderNumber + "and p.productCode='"+productCode+"'";
+            command.CommandText = "SELECT p.productName as name, p.quantityInStock as instock, o.priceEach as price, o.quantityOrdered as ordered from OrderDetails o join Products p on o.productCode = p.productCode where o.orderNumber =" + orderNumber + "and p.productCode='" + productCode + "'";
             reader = command.ExecuteReader();
             if (reader.Read())
             {
@@ -881,6 +881,38 @@ namespace ToyStore
 
             return null;
 
+
+
+        }
+
+        [WebMethod]
+        public bool finalizeOrder(DateTime reqdate,int cust)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select top (1) orderNumber from OrderDetails order by orderNumber desc";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int lastCode = Convert.ToInt32(reader["orderNumber"]);
+            reader.Close();
+            connection.Close();
+            adapter = new SqlDataAdapter("SELECT * FROM Orders", connection);
+            commandBuilder = new SqlCommandBuilder(adapter);
+            DataSet dataSet = new DataSet();
+            adapter.Fill(dataSet, "Orders");
+            DataRow dataRow = dataSet.Tables["Orders"].NewRow();
+            dataRow["orderNumber"] = lastCode;
+            dataRow["orderDate"] = DateTime.Now;
+            dataRow["requiredDate"] = reqdate;
+            dataRow["shippedDate"] = null;
+            dataRow["status"] = "Pending";
+            dataRow["comments"] = null;
+            dataRow["customerNumber"] = Session["CustomerNr"];
+            dataSet.Tables["Orders"].Rows.Add(dataRow);
+           /* try
+            {*/
+                adapter.Update(dataSet, "Orders");
+                return true;
 
 
         }
