@@ -11,10 +11,18 @@ namespace ToyStore
     public partial class EmpCustDet : System.Web.UI.Page
     {
         WebService1 web = new WebService1();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
+            {
+                if(Convert.ToString(Session["State"] )== "Pending")
+                    Response.Redirect("EmployeeOrderNegociate.aspx");
+            }
+            ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
             if (!Page.IsPostBack)
             {
+                
                 ArrayList details = web.getCustomerDetails((int)Session["Customer"]);
                 Label2.Text = Convert.ToString(details[0]);
                 Label4.Text = Convert.ToString(details[1]);
@@ -38,6 +46,25 @@ namespace ToyStore
         protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+
+            string a = Convert.ToString(ListBox1.SelectedItem.Text);
+            bool ok = true;
+            string b = "", c="";
+            for (int i = 0; i < a.Length && ok; i++)
+            {
+                if (a[i + 1] == ':')
+                    ok = false;
+                b = b + a[i];
+            }
+            ok = true;
+            for (int i = a.Length - 1; i > 0 && ok; i--)
+            {
+                if (a[i - 1] == ' ' && a[i - 2] == ':')
+                    ok = false;
+                c = a[i] + c;
+            }
+            Session["State"] = c;
+            Session["Order"] = b;
         }
 
         protected void Button2_Click(object sender, EventArgs e)

@@ -44,7 +44,7 @@
             <asp:DropDownList ID="DropDownList3" runat="server" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged"></asp:DropDownList>   
             <asp:Button ID="Button3" runat="server" Text="search" OnClick="Button3_Click" />
             <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Button1_Click" />
-            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Remove" />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Remove" OnClientClick="return confirm('Are you sure?')"/>
             </p>
             <p>
             <asp:Label ID="Label1" runat="server" Text="Name"></asp:Label>

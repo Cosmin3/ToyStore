@@ -918,7 +918,7 @@ namespace ToyStore
         }
 
         [WebMethod]
-         public bool acceptOrder(string productCode, int newQuant)
+         public bool acceptOrderDetails(string productCode, int newQuant)
         {
             ArrayList productList = new ArrayList();
             connection.Open();
@@ -975,6 +975,62 @@ namespace ToyStore
         }
 
         [WebMethod]
+        public bool acceptOrder(string orderNumber)
+        {
+            ArrayList productList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber as Number From Orders order by orderNumber";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                productList.Add(Convert.ToString(reader["Number"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in productList)
+            {
+                if (orderNumber == slist)
+                    ok = 1;
+                if (orderNumber != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Orders order by orderNumber", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Orders");
+
+
+            dataset.Tables["Orders"].Rows[row]["status"] = "Shipped";
+
+
+            try
+            {
+
+                adapter.Update(dataset, "Orders");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
+        }
+        [WebMethod]
         public bool EmpToCustOffer(string orderNumber)
         {
             ArrayList orderList = new ArrayList();
@@ -1029,9 +1085,42 @@ namespace ToyStore
                 Console.WriteLine("Error: 0" + ex);
                 return false;
             }
-
-
         }
 
+        [WebMethod]
+        public bool updateOrderDetail(int orderNumber, string productCode, int quantityOrdered, double priceEach)
+        {
+
+            try 
+            {
+
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                   // command = connection.CreateCommand();
+                    command.CommandText = "Update OrderDetails Set quantityOrdered = @quant, priceEach = @price where (orderNumber= @number and productCode = @cod)";
+
+                    command.Parameters.AddWithValue("@quant", quantityOrdered);
+                    command.Parameters.AddWithValue("@price", priceEach);
+                    command.Parameters.AddWithValue("@number", orderNumber);
+                    command.Parameters.AddWithValue("@cod", productCode);
+                    
+                    
+                    
+
+                    // command.ExecuteNonQuery();
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+
+                    connection.Close();
+                    return true;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -55,21 +55,21 @@
                     </th>
                     <th align="left">
                         
-                        <p><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></p>
-                        <p><asp:TextBox ID="TextBox2" runat="server"></asp:TextBox></p>
-                        <p><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></p>
-                        <p><asp:TextBox ID="TextBox4" runat="server"></asp:TextBox></p>
+                        <p><asp:TextBox ID="TextBox1" runat="server" Width="230px"></asp:TextBox></p>
+                        <p><asp:TextBox ID="TextBox2" runat="server" Width="230px"></asp:TextBox></p>
+                        <p><asp:TextBox ID="TextBox3" runat="server" Width="230px"></asp:TextBox></p>
+                        <p><asp:TextBox ID="TextBox4" runat="server" Width="230px"></asp:TextBox></p>
                         
                     </th>
                 </tr>
             </table>
             <asp:Button ID="Button1" runat="server" Text="Modify" OnClick="Button1_Click" />
             <asp:Button ID="Button3" runat="server" Text="Undo" OnClick="Button3_Click" />
-            <asp:Button ID="Button4" runat="server" Text="Accept" OnClick="Button4_Click" />
-        <asp:Button ID="Button2" runat="server" Text="Accept the offer" OnClick="Button2_Click" />
+            <asp:Button ID="Button4" runat="server" Text="Accept" OnClick="Button4_Click" OnClientClick="return confirm('Are you sure?')" />
+        <asp:Button ID="Button2" runat="server" Text="Accept the offer" OnClick="Button2_Click" OnClientClick="return confirm('Are you sure?')" />
         </div>
             
-        <p><asp:Button ID="Button5" runat="server" Text="Cancel" OnClick="Button5_Click" /></p>
+        <p><asp:Button ID="Button5" runat="server" Text="Cancel" OnClick="Button5_Click" OnClientClick="return confirm('Are you sure?')"/></p>
     </form>
 </body>
 </html>

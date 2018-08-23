@@ -55,7 +55,7 @@
                 <asp:TextBox ID="TextBox6" TextMode="multiline" style="resize:both" runat="server" Width="199px" Height="84px"></asp:TextBox>
                 
             </p>
-            <asp:Button ID="Button1" runat="server" Text="modify product" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="modify product" OnClick="Button1_Click" OnClientClick="return confirm('Are you sure?')"/>
             <asp:Button ID="Button2" runat="server" Text="Back" OnClick="Button2_Click" />
         </div>
     </form>

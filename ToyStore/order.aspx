@@ -13,7 +13,7 @@
             <asp:ListBox ID="ListBox1" runat="server" Width="257px"></asp:ListBox>
 
             <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
-            <asp:Button ID="Button1" runat="server" Text="Finalize order" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Finalize order" OnClick="Button1_Click" OnClientClick="return confirm('Are you sure?')"/>
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" style="margin-left: 555px" Text="Back" />
         </div>
     </form>
