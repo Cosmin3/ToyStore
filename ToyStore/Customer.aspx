@@ -51,7 +51,13 @@
        
             
        
-             <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="69px"></asp:TextBox>
+             <asp:Label ID="Label5" runat="server" Text="quantity:"></asp:Label>
+       
+            
+       
+             <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="72px"></asp:TextBox>
+            <asp:Label ID="Label6" runat="server" Text="price:"></asp:Label>
+            <asp:TextBox ID="TextBox3" runat="server" style="margin-left: 23px" Width="76px"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Add to cart" style="margin-left: 7px" OnClick="Button1_Click" />
        
             
