@@ -25,7 +25,7 @@ namespace ToyStore
         SqlDataReader reader;
         SqlDataAdapter adapter;
         SqlCommandBuilder builder;
-
+        
         [WebMethod]
         public string HelloWorld()
         {
@@ -941,6 +941,7 @@ namespace ToyStore
                 return false;
             }
         }
+
         [WebMethod]
         public bool EmpToCustOffer(string orderNumber)
         {

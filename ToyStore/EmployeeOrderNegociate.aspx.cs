@@ -11,12 +11,12 @@ namespace ToyStore
     public partial class EmployeeOrderNegociate : System.Web.UI.Page
     {
         WebService1 web = new WebService1();
-        bool modified;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                modified = false;
+                Button2.Visible = true;
                 initButtons();
 
                 ListBox1.Items.Clear();
@@ -30,9 +30,7 @@ namespace ToyStore
             TextBox2.Enabled = false;
             TextBox3.Enabled = false;
             TextBox4.Enabled = false;
-            Button1.Visible = true;
-            if(!modified)
-                Button2.Visible = true;
+            Button1.Visible = true;               
             Button3.Visible = false;
             Button4.Visible = false;
         }
@@ -63,7 +61,7 @@ namespace ToyStore
 
         protected void Button4_Click(object sender, EventArgs e)
         {
-            modified = true;
+            Button2.Visible = false;
             initButtons();
             Button5.Text = "Finish";
             
