@@ -110,5 +110,13 @@ namespace ToyStore
         {
 
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            if ((string)Session["LoggedUser"] == "admin")
+                Response.Redirect("padmin.aspx");
+            else
+                Response.Redirect("productsEmployee.aspx");
+        }
     }
 }

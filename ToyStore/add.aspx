@@ -5,6 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style>
+        #Button2{
+            float: right;
+        }
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -51,6 +57,7 @@
                 
             </p>
             <asp:Button ID="Button1" runat="server" Text="Add Product" OnClick="Button1_Click" />
+            <asp:Button ID="Button2" runat="server" Text="Back" OnClick="Button2_Click" />
         </div>
     </form>
 </body>

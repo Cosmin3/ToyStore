@@ -66,9 +66,10 @@
             <asp:Button ID="Button1" runat="server" Text="Modify" OnClick="Button1_Click" />
             <asp:Button ID="Button3" runat="server" Text="Undo" OnClick="Button3_Click" />
             <asp:Button ID="Button4" runat="server" Text="Accept" OnClick="Button4_Click" />
-        <asp:Button ID="Button2" runat="server" Text="Accept the offer" />
+        <asp:Button ID="Button2" runat="server" Text="Accept the offer" OnClick="Button2_Click" />
         </div>
-        
+            
+        <p><asp:Button ID="Button5" runat="server" Text="Cancel" OnClick="Button5_Click" /></p>
     </form>
 </body>
 </html>

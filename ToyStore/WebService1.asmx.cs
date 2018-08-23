@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=.; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -40,6 +40,24 @@ namespace ToyStore
             connection.Open();
             command = connection.CreateCommand();
             command.CommandText = "Select productCode as Code From Products where productName='" + productName + "' and buyPrice =" + buyPrice;
+            reader = command.ExecuteReader();
+            reader.Read();
+            productCode = (Convert.ToString(reader["Code"]));
+
+
+            reader.Close();
+            connection.Close();
+            return productCode;
+
+        }
+        [WebMethod]
+        public string GetProductsCode2(string productName)
+        {
+            ArrayList products = new ArrayList();
+            string productCode;
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select productCode as Code From Products where productName='" + productName + "'";
             reader = command.ExecuteReader();
             reader.Read();
             productCode = (Convert.ToString(reader["Code"]));
@@ -896,13 +914,123 @@ namespace ToyStore
                 adapter.Update(dataSet, "Orders");
                 return true;
 
-        /*  }
-            catch (SqlException ex)
-            {
-                Console.WriteLine(" Nu am putut actualiza baza de date: " + ex.Message);
-                return false;
-            }*/
 
         }
+
+        [WebMethod]
+         public bool acceptOrder(string productCode, int newQuant)
+        {
+            ArrayList productList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select productCode as Code From Products order by productCode";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                productList.Add(Convert.ToString(reader["Code"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in productList)
+            {
+                if (productCode == slist)
+                    ok = 1;
+                if (productCode != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Products order by productCode", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Products");
+
+
+            dataset.Tables["Products"].Rows[row]["quantityInStock"] = newQuant;
+            
+
+            try
+            {
+
+                adapter.Update(dataset, "Products");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
+        }
+        [WebMethod]
+        public bool EmpToCustOffer(string orderNumber)
+        {
+            ArrayList orderList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber From Orders order by orderNumber";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                orderList.Add(Convert.ToString(reader["orderNumber"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in orderList)
+            {
+                if (orderNumber == slist)
+                    ok = 1;
+                if (orderNumber != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Orders order by orderNumber", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Orders");
+
+
+            dataset.Tables["Orders"].Rows[row]["status"] = "Renegociate";
+
+
+            try
+            {
+
+                adapter.Update(dataset, "Orders");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
+
+
+        }
+
     }
 }

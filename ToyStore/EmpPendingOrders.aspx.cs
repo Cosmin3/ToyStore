@@ -14,7 +14,7 @@ namespace ToyStore
         {
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
-                Session["Order"] = ListBox1.SelectedItem.Text;
+                
                 Response.Redirect("EmployeeOrderNegociate.aspx");
             }
             ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
@@ -30,7 +30,7 @@ namespace ToyStore
 
         protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Session["Order"] = ListBox1.SelectedItem.Text;
         }
 
         protected void Button5_Click(object sender, EventArgs e)
