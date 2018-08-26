@@ -22,8 +22,7 @@ namespace ToyStore
             {
                 this.Label4.Text = "Welcome: " + Session["UserName"];
                 ListBox1.Items.Clear();
-                
-                foreach (String customer in web.GetCustPerLvl(Convert.ToInt32(Session["EmployeeLevel"]),Convert.ToString(Session["LoggedUser"])))
+                foreach (String customer in web.getCustomersForEmployee(Convert.ToInt32(Session["LoggedUser"])))
                     ListBox1.Items.Add(customer);
             }
         }

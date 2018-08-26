@@ -436,8 +436,6 @@ namespace ToyStore
             {
                 if ((Convert.ToString(reader["user"]) == user) && (Convert.ToString(reader["pass"]) == pass))
                 {
-                    reader.Close();
-                    connection.Close();
                     return true;
                 }
             }
@@ -458,8 +456,6 @@ namespace ToyStore
             {
                 if ((Convert.ToString(reader["user"]) == user) && (Convert.ToString(reader["pass"]) == pass))
                 {
-                    reader.Close();
-                    connection.Close();
                     return true;
                 }
             }
@@ -786,7 +782,6 @@ namespace ToyStore
             return orders;
 
         }
-
         [WebMethod]
         public int addOrder(ArrayList arrayList, bool arg)
         {
@@ -829,7 +824,6 @@ namespace ToyStore
                 return 0;
             }
         }
-
         [WebMethod]
         public ArrayList getOrderDetails(int orderNumber)
         {
@@ -1016,7 +1010,7 @@ namespace ToyStore
             adapter.Fill(dataset, "Orders");
 
 
-            dataset.Tables["Orders"].Rows[row]["status"] = "Waiting for payment";
+            dataset.Tables["Orders"].Rows[row]["status"] = "Shipped";
 
 
             try
@@ -1102,6 +1096,7 @@ namespace ToyStore
 
                 using (SqlCommand command = connection.CreateCommand())
                 {
+                   // command = connection.CreateCommand();
                     command.CommandText = "Update OrderDetails Set quantityOrdered = @quant, priceEach = @price where (orderNumber= @number and productCode = @cod)";
 
                     command.Parameters.AddWithValue("@quant", quantityOrdered);
@@ -1109,8 +1104,13 @@ namespace ToyStore
                     command.Parameters.AddWithValue("@number", orderNumber);
                     command.Parameters.AddWithValue("@cod", productCode);
                     
+                    
+                    
+
+                    // command.ExecuteNonQuery();
                     connection.Open();
                     command.ExecuteNonQuery();
+
 
                     connection.Close();
                     return true;
@@ -1121,109 +1121,6 @@ namespace ToyStore
             {
                 return false;
             }
-        }
-
-
-        [WebMethod]
-        public int getEmployeeLevel(int employeeNumber)
-        {
-            int lvl = 0;
-
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "Select reportsTo from Employees where employeeNumber=@emp";
-            command.Parameters.AddWithValue("@emp", employeeNumber);
-            reader = command.ExecuteReader();
-            reader.Read();
-            int emp;
-            while(Convert.ToString(reader[0]) != "NULL")
-            {
-                emp = Convert.ToInt32(reader[0]);
-                reader.Close();
-                connection.Close();
-                
-                lvl++;
-                connection.Open();
-                command = connection.CreateCommand();
-                command.CommandText = "Select reportsTo from Employees where employeeNumber=@emp";
-                command.Parameters.AddWithValue("@emp",emp);
-                reader = command.ExecuteReader();
-                reader.Read();
-                
-            }
-            reader.Close();
-            connection.Close();
-            return lvl;
-
-        }
-
-        [WebMethod]
-        public List<ArrayList> GetOrdersPerLvl(int lvl, string employeeNumber)
-        {
-
-            List<ArrayList> orders = new List<ArrayList>();
-            ArrayList order = new ArrayList();
-            connection.Open();
-            command = connection.CreateCommand();
-            switch(lvl)
-            {
-                case 0: command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers)";
-                    break;
-                case 1: command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers where salesRepEmployeeNumber in (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo in (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo ='" + employeeNumber + "')))";
-                    break;
-                case 2: command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers where salesRepEmployeeNumber in  (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo ='" + employeeNumber + "'))";
-                    break;
-                case 3: command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers where salesRepEmployeeNumber='" + employeeNumber + "')";
-                    break;
-            }
-            //command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers where salesRepEmployeeNumber='"+ employeeNumber + "')";
-            reader = command.ExecuteReader();
-            while(reader.Read())
-            {
-                order.Add(Convert.ToString(reader["orderNumber"]));
-                order.Add(Convert.ToString(reader["status"]));
-                orders.Add((ArrayList)order.Clone());
-                order.Clear();
-            }
-
-            reader.Close();
-            connection.Close();
-            return orders;
-        }
-
-        [WebMethod]
-        public ArrayList GetCustPerLvl(int lvl, string employeeNumber)
-        {
-
-
-            ArrayList customers = new ArrayList();
-            connection.Open();
-            command = connection.CreateCommand();
-            switch (lvl)
-            {
-                case 0:
-                    command.CommandText = "Select customerName from Customers";
-                    break;
-                case 1:
-                    command.CommandText = "Select customerName from Customers where salesRepEmployeeNumber in (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo in (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo ='" + employeeNumber + "'))";
-                    break;
-                case 2:
-                    command.CommandText = "Select customerName from Customers where salesRepEmployeeNumber in  (Select Convert(varchar(50),employeeNumber) from Employees where reportsTo ='" + employeeNumber + "')";
-                    break;
-                case 3:
-                    command.CommandText = "Select customerName from Customers where salesRepEmployeeNumber='" + employeeNumber + "'";
-                    break;
-            }
-            //command.CommandText = "Select orderNumber, status From Orders where customerNumber in (Select customerNumber from Customers where salesRepEmployeeNumber='"+ employeeNumber + "')";
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                customers.Add(reader[0]);
-            }
-
-            reader.Close();
-            connection.Close();
-            return customers;
         }
     }
 }

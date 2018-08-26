@@ -83,6 +83,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="EmpPendingOrders.aspx" />
+    <Content Include="forDesign.aspx" />
     <Content Include="modify.aspx" />
     <Content Include="order.aspx" />
     <Content Include="productDetails.aspx" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="EmpPendingOrders.aspx.designer.cs">
       <DependentUpon>EmpPendingOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forDesign.aspx.cs">
+      <DependentUpon>forDesign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forDesign.aspx.designer.cs">
+      <DependentUpon>forDesign.aspx</DependentUpon>
     </Compile>
     <Compile Include="modify.aspx.cs">
       <DependentUpon>modify.aspx</DependentUpon>

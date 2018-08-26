@@ -21,8 +21,6 @@ namespace ToyStore
 
             if (!Page.IsPostBack)
             {
-                if (Convert.ToInt32(Session["EmployeeLevel"]) != 3)
-                    Button6.Visible = false;
                 this.Label4.Text = "Welcome: " + Session["UserName"];
                 this.refresh();
             }

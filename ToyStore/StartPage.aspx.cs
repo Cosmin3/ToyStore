@@ -37,7 +37,6 @@ namespace ToyStore
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
                     Session["LoggedUser"] = TextBox2.Text;
                     Session["UserName"] = TextBox1.Text;
-                    Session["EmployeeLevel"] = web.getEmployeeLevel(Convert.ToInt32(TextBox2.Text));
                     Response.Redirect("productsEmployee.aspx");
                 }
                     
@@ -75,5 +74,26 @@ namespace ToyStore
         {
             Response.Redirect("pcustomer.aspx");
         }
+
+
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            if (CheckBox1.Checked==true)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
+                string pass = TextBox2.Text;
+                TextBox2.TextMode = TextBoxMode.Password;
+                TextBox2.Attributes.Add("value", pass);
+               
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
+                TextBox2.TextMode = TextBoxMode.SingleLine;
+            }
+        }
+
+        
     }
 }
