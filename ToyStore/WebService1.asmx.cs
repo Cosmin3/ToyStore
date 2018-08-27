@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -850,7 +850,22 @@ namespace ToyStore
 
 
         }
-
+        [WebMethod]
+        public ArrayList getOrderproductCode(int orderNumber)
+        {
+            ArrayList array = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT productCode from OrderDetails where orderNumber="+orderNumber;
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                array.Add(Convert.ToString(reader["productCode"]));
+            }
+            reader.Close();
+            connection.Close();
+            return array;
+        }
         [WebMethod]
         public ArrayList getOrderProductDetails(int orderNumber, string productCode)
         {
@@ -884,7 +899,27 @@ namespace ToyStore
 
 
         }
-
+        [WebMethod]
+        public bool productquantity(string productCode,int quantity)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText="select quantityInStock from Products where productCode = '"+productCode+"'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            if (Convert.ToInt32(reader["quantityInStock"]) < quantity)
+            {
+                reader.Close();
+                connection.Close();
+                return false;
+            }
+            else
+            {
+                reader.Close();
+                connection.Close();
+                return true;
+            }
+        }
         [WebMethod]
         public bool finalizeOrder(DateTime reqdate,int cust)
         {
@@ -916,7 +951,27 @@ namespace ToyStore
 
 
         }
-
+        [WebMethod]
+        public bool checkCustomercredit(int customerNumber,int ordercost)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "select creditLimit from Customers where customerNumber =" + customerNumber;
+            reader = command.ExecuteReader();
+            reader.Read();
+            if (Convert.ToInt32(reader["creditLimit"]) < ordercost)
+            {
+                reader.Close();
+                connection.Close();
+                return false;
+            }
+            else
+            {
+                reader.Close();
+                connection.Close();
+                return true;
+            }
+        }
         [WebMethod]
          public bool acceptOrderDetails(string productCode, int newQuant)
         {
