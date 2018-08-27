@@ -114,9 +114,29 @@ namespace ToyStore
             }
             ArrayList ts = new ArrayList();
             ts.Add(Session["selectedproduct"]);
-            ts.Add(Convert.ToInt32(TextBox2.Text));
-            ts.Add(Convert.ToDouble(TextBox3.Text));
-            Session["ordernr"] = web.addOrder(ts, cat);
+            int i;
+            if (!int.TryParse(TextBox2.Text, out i))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "The Quantity must be an integer" + "');", true);
+            }
+            else
+            {
+                double d;
+                if(!double.TryParse(TextBox3.Text,out d))
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "The Price must be decimal" + "');", true);
+                else
+                {
+                    if (!web.productquantity(web.GetProductsCode2(Convert.ToString(Session["selectedproduct"])), Convert.ToInt32(TextBox2.Text)))
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Not enough products in stock" + "');", true);
+                    else
+                    {
+                        ts.Add(Convert.ToInt32(TextBox2.Text));
+                        ts.Add(Convert.ToDouble(TextBox3.Text));
+                        Session["ordernr"] = web.addOrder(ts, cat);
+                    }
+                }
+            }
+           
             if (Convert.ToInt32(Session["ordernr"])!= 0)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Product added to cart" + "');", true);

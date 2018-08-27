@@ -78,7 +78,7 @@
        
             
        
-             <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="72px"></asp:TextBox>
+             <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="72px" ></asp:TextBox>
             <asp:Label ID="Label6" runat="server" Text="price:"></asp:Label>
             <asp:TextBox ID="TextBox3" runat="server" style="margin-left: 23px" Width="76px"></asp:TextBox>
             <button id="Button1" runat="server" onserverclick="Button1_Click"><i class="fa fa-shopping-cart">Add to cart</i></button>
