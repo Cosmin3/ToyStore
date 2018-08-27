@@ -1,11 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="forDesign.aspx.cs" Inherits="ToyStore.forDesign" %>
 
-<!DOCTYPE html>
+
+
+<!DOCTYPE html >
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
     <style>
         #Button1 {
             background-color: #4CAF50;
@@ -171,7 +176,6 @@
                 border-radius: 12px;
                 color: black;
                 box-shadow: none;
-                
             }
 
         #field-icon {
@@ -181,8 +185,6 @@
             position: relative;
             z-index: 2;
         }
-
-        
     </style>
 
 </head>
@@ -198,10 +200,10 @@
         </p>
         <asp:Button ID="Button3" runat="server" Text="Button" />
         <p>
-            <button id="Button4" runat="server"><i class="fa fa-trash">Remove</i> </button>
+            <button id="Button4" runat="server" onserverclick="functionName"><i class="fa fa-trash">Remove</i> </button>
 
         </p>
-        <button id="Button5" runat="server"><i class="fa fa-search">Search</i> </button>
+        <button id="Button5" runat="server" onserverclick="functionName"><i class="fa fa-search">Search</i></button>
         <p>
             <button id="Button6" runat="server"><i class="fa fa-save">Save</i> </button>
         </p>
@@ -211,27 +213,29 @@
         <p>
             <input id="Password1" type="password" class="form-control" name="password" />
             <span data-toggle="#Password1" class="fa fa-fw fa-eye "></span>
-            
+
         </p>
         <p>
-            Password: <input type="password" value="FakePSW" id="myEye"><br><br>
-<span  class="fa fa-fw fa-eye " onclick="myFunction()"></span> Show Password
+            Password:
+            <input type="password" value="FakePSW" id="myEye"><br>
+            <br>
+            <span class="fa fa-fw fa-eye " onclick="myFunction()"></span>Show Password
 
-<script>
-function myFunction() {
-    var x = document.getElementById("myEye");
-    if (x.type == "password") {
-        x.type = "text";
-        <span class="fa fa-fw fa-eye "> </span>;
-    } else {
-        x.type = "password";
-        <span class="fa-eye fa-eye-slash "> </span>
-        
-    }
-}
-</script>
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myEye");
+                    if (x.type == "password") {
+                        x.type = "text";
+                        <span class="fa fa-fw fa-eye "> </span>;
+                    } else {
+                        x.type = "password";
+                        <span class="fa-eye fa-eye-slash "> </span>
+
+                    }
+                }
+            </script>
         </p>
- 
+
     </form>
 </body>
 </html>

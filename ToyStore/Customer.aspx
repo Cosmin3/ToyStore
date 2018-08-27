@@ -4,8 +4,31 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title></title>
    <style>
+        #Button1 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            margin-left: 20px;
+        }
+
+            #Button1:active:hover {
+                background-color: RoyalBlue;
+                border-radius: 12px;
+                color: black;
+                box-shadow: none;
+            }
+
         #Button4{
             
             float: right;
@@ -58,8 +81,8 @@
              <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 25px" Width="72px"></asp:TextBox>
             <asp:Label ID="Label6" runat="server" Text="price:"></asp:Label>
             <asp:TextBox ID="TextBox3" runat="server" style="margin-left: 23px" Width="76px"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Text="Add to cart" style="margin-left: 7px" OnClick="Button1_Click" />
-       
+            <button id="Button1" runat="server" onserverclick="Button1_Click"><i class="fa fa-shopping-cart">Add to cart</i></button>
+            
             
        
         </div>

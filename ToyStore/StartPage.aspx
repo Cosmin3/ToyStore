@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Welcome to the Toystore</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
         h1 {
@@ -106,7 +108,7 @@
                 <asp:TextBox ID="TextBox2" runat="server" Width="150px" type="password"> </asp:TextBox>
             </p>
             <p>
-                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction()" class="fa fa-fw fa-eye" Text="Show password"  />
+                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction()" Text="Show password"  />
                 <script>
                     function myFunction() {
                         var x = document.getElementById("TextBox2");
@@ -126,7 +128,7 @@
                 </asp:DropDownList>
             </p>
             <p>
-                <asp:Button ID="Button1" runat="server" Text="login" Width="107px" OnClick="Button1_Click" />
+                <button id="Button1"  runat="server" onserverclick="Button1_Click"><i class="fa fa-sign-in">  Login</i></button>
                 <asp:Button ID="Button2" runat="server" Text="Proceed as guest" Width="164px" OnClick="Button2_Click" />
             </p>
         </div>
