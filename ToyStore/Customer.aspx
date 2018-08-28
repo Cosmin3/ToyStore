@@ -133,11 +133,6 @@
         .topButton {
             float: right;
         }
-
-
-
-
-
         .Button6 {
             background-color: DodgerBlue;
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -207,10 +202,7 @@
             </p>
             <asp:ListBox ID="ListBox1" runat="server" Height="130px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
 
-
-
             <asp:Label ID="Label5" runat="server" Text="quantity:"></asp:Label>
-
 
 
             <asp:TextBox ID="TextBox2" runat="server" Style="margin-left: 25px" Width="72px"></asp:TextBox>
@@ -218,8 +210,6 @@
             <asp:TextBox ID="TextBox3" runat="server" Style="margin-left: 23px" Width="76px"></asp:TextBox>
             <button id="Button1" runat="server" onserverclick="Button1_Click" ><i class="fa fa-cart-arrow-down">  Add to cart</i></button>
             <button id="Button4" runat="server" onserverclick="Button4_Click"><i class="fa fa-sign-out">  Logout</i></button>
-
-
 
         </div>
     </form>
