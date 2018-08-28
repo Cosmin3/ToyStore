@@ -58,6 +58,15 @@ namespace ToyStore
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
+           if(CheckBox1.Checked == true)
+            {
+                CheckBox1.Checked = false;
+            }
+            else
+            {
+                CheckBox1.Checked = false;
+            }
+           
             if (DropDownList1.Text == "Customer")
             {
                 Label1.Text = "Telephone:";
@@ -74,26 +83,5 @@ namespace ToyStore
         {
             Response.Redirect("pcustomer.aspx");
         }
-
-
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            
-            if (CheckBox1.Checked==true)
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
-                string pass = TextBox2.Text;
-                TextBox2.TextMode = TextBoxMode.Password;
-                TextBox2.Attributes.Add("value", pass);
-               
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
-                TextBox2.TextMode = TextBoxMode.SingleLine;
-            }
-        }
-
-        
     }
 }

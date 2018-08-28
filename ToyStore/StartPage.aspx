@@ -105,10 +105,10 @@
             </p>
             <p>
                 <asp:Label ID="Label2" runat="server" Text="Password:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width="150px" type="password"> </asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server" Width="150px" Type="password"> </asp:TextBox>
             </p>
             <p>
-                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction()" Text="Show password"  />
+                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction()" Text="Show password"  Checked="False" />
                 <script>
                     function myFunction() {
                         var x = document.getElementById("TextBox2");
@@ -119,13 +119,15 @@
                         }
                     }
                 </script>
+                 
             </p>
             <p>
                 <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-                    <asp:ListItem Selected="True">Customer</asp:ListItem>
+                    <asp:ListItem Selected="True" >Customer</asp:ListItem>
                     <asp:ListItem>Employee</asp:ListItem>
                     <asp:ListItem>Admin</asp:ListItem>
                 </asp:DropDownList>
+               
             </p>
             <p>
                 <button id="Button1"  runat="server" onserverclick="Button1_Click"><i class="fa fa-sign-in">  Login</i></button>
