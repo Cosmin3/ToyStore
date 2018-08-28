@@ -25,7 +25,7 @@
             </p>
             <p>
                  <asp:Label ID="Label3" runat="server" Text="Line"></asp:Label>
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="16px" Width="145px">
+                <asp:DropDownList ID="DropDownList1" runat="server" Height="25px" Width="145px">
                  </asp:DropDownList>
             </p>
             <p>

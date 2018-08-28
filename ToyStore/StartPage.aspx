@@ -96,7 +96,7 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
         <h1>Welcome to the Toystore</h1>
         <div>
             <p>
@@ -105,10 +105,10 @@
             </p>
             <p>
                 <asp:Label ID="Label2" runat="server" Text="Password:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width="150px" type="password"> </asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server" Width="150px" type="password" TextMode="Password"></asp:TextBox>
             </p>
             <p>
-                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction()" Text="Show password"  />
+                <asp:CheckBox ID="CheckBox1" runat="server" onclick="myFunction2()" Text="Show password" OnCheckedChanged="CheckBox1_CheckedChanged"  />
                 <script>
                     function myFunction() {
                         var x = document.getElementById("TextBox2");
@@ -118,10 +118,11 @@
                             x.type = "password";
                         }
                     }
+                    
                 </script>
             </p>
             <p>
-                <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                     <asp:ListItem Selected="True">Customer</asp:ListItem>
                     <asp:ListItem>Employee</asp:ListItem>
                     <asp:ListItem>Admin</asp:ListItem>
