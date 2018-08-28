@@ -115,7 +115,7 @@ namespace ToyStore
             foreach(ListItem product in ListBox1.Items)
             {
                ArrayList arrayList = web.getOrderProductDetails(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(product.Text)));
-               if( web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3])))
+               if( web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3]))&&web.OrderPayment(web.TotalOrderCost(Convert.ToInt32(Session["Order"])),web.getCustomerbyorder(Convert.ToInt32(Session["Order"]))))
                {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Oferta acceptata" + "');", true);
                     Response.Redirect("EmpPendingOrders.aspx");

@@ -1299,6 +1299,19 @@ namespace ToyStore
 
             return cost;
         }
+        [WebMethod]
+        public int getCustomerbyorder(int orderNumber)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "select customerNumber from Orders where orderNumber=" + orderNumber;
+            reader = command.ExecuteReader();
+            reader.Read();
+            int a= Convert.ToInt32(reader["customerNumber"]);
+            reader.Close();
+            connection.Close();
+            return a;
+        }
     }
 
     

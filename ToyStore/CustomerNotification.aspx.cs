@@ -115,7 +115,7 @@ namespace ToyStore
             foreach (ListItem product in ListBox1.Items)
             {
                 ArrayList arrayList = web.getOrderProductDetails(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(product.Text)));
-                if (web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3])) && web.acceptOrder(Convert.ToString(Session["Order"]))&& web.OrderPayment(Convert.ToDouble(Session["cost"]),Convert.ToInt32(Session["customernr"])))
+                if (web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3])) && web.acceptOrder(Convert.ToString(Session["Order"]))&& web.OrderPayment(web.TotalOrderCost(Convert.ToInt32(Session["ordernr"])),Convert.ToInt32(Session["CustomerNr"])))
                 {
 
                     Session["Order"] = 0;
