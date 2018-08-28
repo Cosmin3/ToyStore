@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=.; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -1037,17 +1037,26 @@ namespace ToyStore
             command.CommandText = "Select creditLimit from Customers where customerNumber=" + customernr;
             reader = command.ExecuteReader();
             reader.Read();
+            double s= Convert.ToDouble(reader["creditLimit"]) - cost;
+            reader.Close();
+            connection.Close();
             try
             {
 
                 using (SqlCommand command = connection.CreateCommand())
-                
-                    command.CommandText = "Update Customer Set creditLimit = @credit where (customerNumber= @number)";
+                {
 
-                    command.Parameters.AddWithValue("@credit",Convert.ToDouble(reader["creditLimit"])-cost);
-                    command.Parameters.AddWithValue("@number", customernr);
-                reader.Close();
-                command.ExecuteNonQuery();
+                    command.CommandText = "Update Customers Set creditLimit = " + s + " where (customerNumber= " + customernr + ")";
+
+                    //  command.Parameters.AddWithValue("@credit",Convert.ToDouble(reader["creditLimit"])-cost);
+                    // command.Parameters.AddWithValue("@number", customernr);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+                connection.Open();
                 adapter = new SqlDataAdapter("SELECT * FROM Payments", connection);
                 commandBuilder = new SqlCommandBuilder(adapter);
                 DataSet dataSet = new DataSet();

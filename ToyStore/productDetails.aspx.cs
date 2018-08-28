@@ -34,10 +34,11 @@ namespace ToyStore
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (Convert.ToString(Session["loggedUser"]) == "customer")
-                Response.Redirect("Customer.aspx");
-            else
+            if (Convert.ToString(Session["loggedUser"]) == "")
                 Response.Redirect("pcustomer.aspx");
+            
+            else
+                Response.Redirect("Customer.aspx");
         }
     }
 }

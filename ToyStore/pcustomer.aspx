@@ -167,11 +167,11 @@
         <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
         <p>
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-            <asp:DropDownList ID="DropDownList1" runat="server" Style="margin-left: 35px">
+            <asp:DropDownList ID="DropDownList1" runat="server" Height="21px" Style="margin-left: 35px">
                 <asp:ListItem Value="productName">Name</asp:ListItem>
                 <asp:ListItem Value="buyPrice">Price</asp:ListItem>
             </asp:DropDownList>
-            <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" Style="margin-left: 38px" Height="19px">
+            <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" Style="margin-left: 38px" Height="21px">
                 <asp:ListItem Value="True">Ascendent</asp:ListItem>
                 <asp:ListItem Value="False">Descendent</asp:ListItem>
             </asp:DropDownList>
