@@ -72,7 +72,7 @@
     <form id="form1" runat="server">
         <div>
 
-            <asp:ListBox ID="ListBox1" runat="server" heigth="200px" Width="420px" Height="130px"></asp:ListBox>
+            <asp:ListBox ID="ListBox1" runat="server" heigth="200px" Width="420px" Height="130px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged"></asp:ListBox>
 
             <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
             <br />

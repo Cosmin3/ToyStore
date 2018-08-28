@@ -116,7 +116,7 @@
             </p>
             <p>
                  <asp:Label ID="Label3" runat="server" Text="Line"></asp:Label>
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="24px" Width="154px" style="margin-left: 43px; margin-top: 0px;">
+                <asp:DropDownList ID="DropDownList1" runat="server" Height="25px" Width="145px">
                  </asp:DropDownList>
             </p>
             <p>

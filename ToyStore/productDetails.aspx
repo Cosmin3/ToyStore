@@ -94,10 +94,7 @@
                  <asp:Label ID="Label5" runat="server" Text="Vendor"></asp:Label>
                 <asp:TextBox ID="TextBox5" runat="server" Enabled="False" style="margin-left: 40px" ></asp:TextBox>
             </p>
-            <p>
-                 <asp:Label ID="Label6" runat="server" Text="Description"></asp:Label>
-                <asp:TextBox ID="TextBox6" runat="server" Enabled="False" style="margin-left: 12px" ></asp:TextBox>
-            </p>
+            
             <p>
                  <asp:Label ID="Label7" runat="server" Text="Quantity"></asp:Label>
                 <asp:TextBox ID="TextBox7" runat="server" Enabled="False" style="margin-left: 32px" ></asp:TextBox>
@@ -109,6 +106,12 @@
             <p>
                  <asp:Label ID="Label9" runat="server" Text="MSRP"></asp:Label>
                 <asp:TextBox ID="TextBox9" runat="server" Enabled="False" style="margin-left: 46px" ></asp:TextBox>
+            </p>
+            <asp:Label ID="Label6" runat="server" Text="Description"></asp:Label>   
+            <p>
+                 
+                <asp:TextBox ID="TextBox6" TextMode="multiline" style="resize:both" runat="server" Width="199px" Height="84px"></asp:TextBox>
+                
             </p>
              <button id="Button1" runat="server" onserverclick="Button1_Click" style="margin-left: 40px"><i class="fa fa-mail-reply">   Back</i></button>
             

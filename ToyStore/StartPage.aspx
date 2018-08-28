@@ -96,7 +96,7 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
         <h1>Welcome to the Toystore</h1>
         <div>
             <p>
@@ -118,6 +118,7 @@
                             x.type = "password";
                         }
                     }
+                    
                 </script>
                  
             </p>

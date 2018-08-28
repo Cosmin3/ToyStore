@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=.; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -1028,7 +1028,60 @@ namespace ToyStore
                 return false;
             }
         }
+        [WebMethod]
+        public bool OrderPayment(double cost,int customernr)
+        {
+            Random r = new Random();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select creditLimit from Customers where customerNumber=" + customernr;
+            reader = command.ExecuteReader();
+            reader.Read();
+            double s= Convert.ToDouble(reader["creditLimit"]) - cost;
+            reader.Close();
+            connection.Close();
+            try
+            {
 
+                using (SqlCommand command = connection.CreateCommand())
+                {
+
+                    command.CommandText = "Update Customers Set creditLimit = " + s + " where (customerNumber= " + customernr + ")";
+
+                    //  command.Parameters.AddWithValue("@credit",Convert.ToDouble(reader["creditLimit"])-cost);
+                    // command.Parameters.AddWithValue("@number", customernr);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+                connection.Open();
+                adapter = new SqlDataAdapter("SELECT * FROM Payments", connection);
+                commandBuilder = new SqlCommandBuilder(adapter);
+                DataSet dataSet = new DataSet();
+                adapter.Fill(dataSet, "Payments");
+                DataRow dataRow = dataSet.Tables["Payments"].NewRow();
+                dataRow["customerNumber"] = customernr;
+                dataRow["checkNumber"] = r.Next();
+                dataRow["paymentDate"] = DateTime.Now;
+                dataRow["amount"] = cost;
+                dataSet.Tables["Payments"].Rows.Add(dataRow);
+                adapter.Update(dataSet, "Payments");
+
+                // command.ExecuteNonQuery();
+               
+
+
+                    connection.Close();
+                    return true;
+
+            }
+            catch (SqlException ex)
+            {
+                return false;
+            }
+        }
         [WebMethod]
         public bool acceptOrder(string orderNumber)
         {
@@ -1141,7 +1194,62 @@ namespace ToyStore
                 return false;
             }
         }
+        [WebMethod]
+        public bool CustToEmployeeOffer(string orderNumber)
+        {
+            ArrayList orderList = new ArrayList();
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select orderNumber From Orders order by orderNumber";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                orderList.Add(Convert.ToString(reader["orderNumber"]));
+            }
 
+            reader.Close();
+            connection.Close();
+
+            int row = 0;
+            int ok = 0;
+            foreach (string slist in orderList)
+            {
+                if (orderNumber == slist)
+                    ok = 1;
+                if (orderNumber != slist && ok == 0)
+                    row++;
+
+            }
+
+            adapter = new SqlDataAdapter("Select * from Orders order by orderNumber", connection);
+
+
+            builder = new SqlCommandBuilder(adapter);
+            DataSet dataset = new DataSet();
+
+            adapter.Fill(dataset, "Orders");
+
+
+            dataset.Tables["Orders"].Rows[row]["status"] = "Pending";
+
+
+            try
+            {
+
+                adapter.Update(dataset, "Orders");
+
+
+                connection.Close();
+                Console.WriteLine("OK");
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                connection.Close();
+                Console.WriteLine("Error: 0" + ex);
+                return false;
+            }
+        }
         [WebMethod]
         public bool updateOrderDetail(int orderNumber, string productCode, int quantityOrdered, double priceEach)
         {
@@ -1177,5 +1285,43 @@ namespace ToyStore
                 return false;
             }
         }
+
+        [WebMethod]
+        public double TotalOrderCost(int orderNumber)
+        {
+            double cost = 0;
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select priceEach as price, QuantityOrdered as quant From OrderDetails where orderNumber="+orderNumber;
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                cost = cost + (Convert.ToDouble(reader["price"]) * Convert.ToDouble(reader["quant"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+
+
+
+            return cost;
+        }
+        [WebMethod]
+        public int getCustomerbyorder(int orderNumber)
+        {
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "select customerNumber from Orders where orderNumber=" + orderNumber;
+            reader = command.ExecuteReader();
+            reader.Read();
+            int a= Convert.ToInt32(reader["customerNumber"]);
+            reader.Close();
+            connection.Close();
+            return a;
+        }
     }
+
+    
 }

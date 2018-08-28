@@ -38,18 +38,21 @@ namespace ToyStore
         {
             if (!web.checkCustomercredit(Convert.ToInt32(Session["CustomerNr"]), Convert.ToInt32(Session["cost"])))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert1", "alert('" + "You don't have enough credit to purchase the items! Please redo the order" + "');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " You don't have enought credit" + "');", true);
             }
             else
             {
                 if (web.finalizeOrder(Convert.ToDateTime(Session["requiredate"]), Convert.ToInt32(Session["CustomerNr"])))
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert2", "alert('" + " Order sent to employee" + "');", true);
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Order sent to employee" + "');", true);
                     Response.Redirect("Customer.aspx");
+                    
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert3", "alert('" + "Error" + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Eroare" + "');", true);
+
                 }
             }
         }
@@ -57,6 +60,11 @@ namespace ToyStore
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("Customer.aspx");
+        }
+
+        protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

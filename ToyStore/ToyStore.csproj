@@ -77,6 +77,9 @@
   <ItemGroup>
     <Content Include="add.aspx" />
     <Content Include="Customer.aspx" />
+    <Content Include="CustomerNotification.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="EmpCustDet.aspx" />
     <Content Include="EmployeeCust.aspx" />
     <Content Include="EmployeeOrderNegociate.aspx">
@@ -108,6 +111,15 @@
     </Compile>
     <Compile Include="Customer.aspx.designer.cs">
       <DependentUpon>Customer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerNotification.aspx.cs">
+      <DependentUpon>CustomerNotification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="CustomerNotification.aspx.designer.cs">
+      <DependentUpon>CustomerNotification.aspx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="EmpCustDet.aspx.cs">
       <DependentUpon>EmpCustDet.aspx</DependentUpon>

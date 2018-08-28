@@ -23,6 +23,9 @@ namespace ToyStore
 
             if (!Page.IsPostBack)
             {
+                TextBox2.Enabled = false;
+                TextBox3.Enabled = false;
+                Button1.Visible = false;
                 ArrayList array = new ArrayList();
                 array=web.getCustomerDetails(Convert.ToInt32(Session["CustomerNr"]));
                 this.Label4.Text = "Welcome: " + array[1];
@@ -73,6 +76,9 @@ namespace ToyStore
                     ok = false;
                 c = a[i] + c;
             }
+            TextBox2.Enabled = true;
+            TextBox3.Enabled = true;
+            Button1.Visible = true;
             Session["selectedproduct"] = b;
             Session["price"] = Convert.ToDouble(c);
 
@@ -157,6 +163,11 @@ namespace ToyStore
             }
             TextBox2.Text = "";
             TextBox3.Text = "";
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CustomerNotification.aspx");
         }
     }
 }
