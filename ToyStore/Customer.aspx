@@ -179,7 +179,11 @@
                 <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
 
             </p>
-            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click"><span><i class="fa fa-shopping-cart">  Cart</i></span><span class="badge" style="visibility: visible" >6 </span></button>
+            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click">
+                <span><i class="fa fa-shopping-cart">  Cart</i></span>
+                <span id="spanNote" class="badge" style="visibility: visible" >2</span>
+
+            </button>
 
             <p>
                 <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
