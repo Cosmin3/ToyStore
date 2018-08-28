@@ -56,12 +56,42 @@ namespace ToyStore
                 }
             }
         }
+        private void refresh()
+        {
+            ListBox1.Items.Clear();
 
+            ArrayList array = new ArrayList();
+            ArrayList prod = new ArrayList();
+            array = web.getOrderproductCode(Convert.ToInt32(Session["ordernr"]));
+            foreach (string a in array)
+            {
+                prod = web.getOrderProductDetails(Convert.ToInt32(Session["ordernr"]), a);
+                ListBox1.Items.Add(prod[0] + "..." + prod[2] + "..." + prod[3]);
+
+            }
+        }
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("Customer.aspx");
         }
 
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            String a = Convert.ToString(ListBox1.SelectedItem.Text);
+            bool ok = true;
+            String b = "";
+            for (int i = 0; i < a.Length && ok; i++)
+            {
+                if (a[i + 1] == '.' && a[i + 2] == '.' && a[i + 3] == '.')
+                    ok = false;
+                b = b + a[i];
+            }
+
+            web.removeCart(web.GetProductsCode2(b),Convert.ToInt32(Session["ordernr"]));
+            this.refresh();
+
+
+        }
         protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 

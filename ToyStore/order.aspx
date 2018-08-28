@@ -32,7 +32,26 @@
                 color: black;
                 box-shadow: none;
             }
+            #Button3 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            margin-left: 20px;
+        }
 
+            #Button3:active:hover {
+                background-color: RoyalBlue;
+                border-radius: 12px;
+                color: black;
+                box-shadow: none;
+            }
 
          
         #Button2 {
@@ -76,10 +95,12 @@
 
             <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
             <br />
+           
             <br />
-            <asp:Button ID="Button1" runat="server" Text="Finalize order" OnClick="Button1_Click" />
+             <button id="Button3" runat="server" onserverclick="Button3_Click" style="margin-left: 21px; height: 49px; width: 136px;" ><i class="fa fa-trash">  Remove</i> </button>
+           
               <button id="Button2" runat="server" onserverclick="Button2_Click" style="margin-left: 1138px"><i class="fa fa-mail-reply">   Back</i></button>
-            
+             <asp:Button ID="Button1" runat="server" Text="Finalize order" OnClick="Button1_Click" />
         </div>
     </form>
 </body>

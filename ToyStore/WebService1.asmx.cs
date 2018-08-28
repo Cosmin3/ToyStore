@@ -19,7 +19,7 @@ namespace ToyStore
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=classicmodels;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.; Initial Catalog=classicmodels;Integrated Security=True");
         SqlCommand command;
         SqlCommandBuilder commandBuilder;
         SqlDataReader reader;
@@ -477,7 +477,23 @@ namespace ToyStore
             return false;
         }
 
+        [WebMethod]
+        public bool removeCart(string productCode,int ordernumber)
+        {
+            using (SqlCommand command = connection.CreateCommand())
+            {
 
+                command.CommandText = "Delete OrderDetails where (orderNumber=@number and productCode=@code )";
+
+                  command.Parameters.AddWithValue("@code",productCode);
+                 command.Parameters.AddWithValue("@number", ordernumber);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+        }
         [WebMethod]
         public bool deleteToy(string productName)
         {
