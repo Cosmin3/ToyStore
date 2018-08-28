@@ -84,7 +84,10 @@
             border-radius: 5px;
             margin-left: 57px;
         }
-
+        #Button2 {
+            float:right;
+            margin-left: 0px;
+        }
         #DropDownList2 {
             background-color: skyblue;
             border: 2px solid cornflowerblue;
@@ -179,8 +182,9 @@
                 <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
 
             </p>
-            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click"><span><i class="fa fa-shopping-cart">  Cart</i></span><span class="badge" style="visibility: visible" >6 </span></button>
 
+            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click"><span><i class="fa fa-shopping-cart">  Cart</i></span><span class="badge" style="visibility: visible" >6 </span></button>
+            <asp:Button ID="Button2" runat="server" Text="Notifications" OnClick="Button2_Click" />
             <p>
                 <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             </p>
