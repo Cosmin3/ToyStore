@@ -84,10 +84,7 @@
             border-radius: 5px;
             margin-left: 57px;
         }
-        #Button2 {
-            float:right;
-            margin-left: 0px;
-        }
+
         #DropDownList2 {
             background-color: skyblue;
             border: 2px solid cornflowerblue;
@@ -136,11 +133,6 @@
         .topButton {
             float: right;
         }
-
-
-
-
-
         .Button6 {
             background-color: DodgerBlue;
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -182,9 +174,12 @@
                 <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
 
             </p>
+            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click">
+                <span><i class="fa fa-shopping-cart">  Cart</i></span>
+                <span id="spanNote" class="badge" style="visibility: visible" >2</span>
 
-            <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click"><span><i class="fa fa-shopping-cart">  Cart</i></span><span class="badge" style="visibility: visible" >6 </span></button>
-            <asp:Button ID="Button2" runat="server" Text="Notifications" OnClick="Button2_Click" />
+            </button>
+
             <p>
                 <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             </p>
@@ -207,19 +202,14 @@
             </p>
             <asp:ListBox ID="ListBox1" runat="server" Height="130px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
 
-
-
-            <asp:Label ID="Label5" runat="server" Text="Quantity:"></asp:Label>
-
+            <asp:Label ID="Label5" runat="server" Text="quantity:"></asp:Label>
 
 
             <asp:TextBox ID="TextBox2" runat="server" Style="margin-left: 25px" Width="72px"></asp:TextBox>
-            <asp:Label ID="Label6" runat="server" Text="Price:"></asp:Label>
+            <asp:Label ID="Label6" runat="server" Text="price:"></asp:Label>
             <asp:TextBox ID="TextBox3" runat="server" Style="margin-left: 23px" Width="76px"></asp:TextBox>
             <button id="Button1" runat="server" onserverclick="Button1_Click" ><i class="fa fa-cart-arrow-down">  Add to cart</i></button>
             <button id="Button4" runat="server" onserverclick="Button4_Click"><i class="fa fa-sign-out">  Logout</i></button>
-
-
 
         </div>
     </form>

@@ -10,6 +10,7 @@ namespace ToyStore
 {
     public partial class Customer : System.Web.UI.Page
     {
+        int a;
         bool cat;
         WebService1 web = new WebService1();
         protected void Page_Load(object sender, EventArgs e)
@@ -139,6 +140,11 @@ namespace ToyStore
                         ts.Add(Convert.ToInt32(TextBox2.Text));
                         ts.Add(Convert.ToDouble(TextBox3.Text));
                         Session["ordernr"] = web.addOrder(ts, cat);
+                        a++;
+                        Session["nrcart"] = a;
+                       // HtmlGenericControl spanNote = (HtmlGenericControl)UpdateProgress1.FindControl("spanNote");
+                        //spanNote.InnerHTML = Session["nrcart"];
+
                     }
                 }
             }
@@ -147,6 +153,8 @@ namespace ToyStore
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Product added to cart" + "');", true);
                 Session["sameorder"] = Session["CustomerNr"];
+
+
                 
             }
             else
