@@ -44,8 +44,11 @@ namespace ToyStore
             {
                 if (web.finalizeOrder(Convert.ToDateTime(Session["requiredate"]), Convert.ToInt32(Session["CustomerNr"])))
                 {
+
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert2", "alert('" + " Order sent to employee" + "');", true);
+                    Session["ordernr"] = 0;
                     Response.Redirect("Customer.aspx");
+                    
                 }
                 else
                 {
