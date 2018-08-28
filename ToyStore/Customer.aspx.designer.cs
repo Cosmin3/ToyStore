@@ -46,7 +46,7 @@ namespace ToyStore {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button6;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button6;
         
         /// <summary>
         /// Label3 control.
@@ -100,7 +100,7 @@ namespace ToyStore {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button3;
         
         /// <summary>
         /// Label1 control.
@@ -172,7 +172,7 @@ namespace ToyStore {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
         
         /// <summary>
         /// Button4 control.
@@ -181,6 +181,6 @@ namespace ToyStore {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button4;
     }
 }

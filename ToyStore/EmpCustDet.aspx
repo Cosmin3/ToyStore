@@ -5,11 +5,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <style> 
-        #ListBox1{
-           display:inline-block;
-           text-align:center;
-           
+         body {
+            background-color: #ccccff;
+        }
+
+         #Button1 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            margin-left: 20px;
+        }
+
+            #Button1:active:hover {
+                background-color: RoyalBlue;
+                border-radius: 12px;
+                color: black;
+                box-shadow: none;
+            }
+        
+
+          #Button2 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            margin-left: 20px;
+        }
+
+            #Button2:active:hover {
+                background-color: RoyalBlue;
+                border-radius: 12px;
+                color: black;
+                box-shadow: none;
+            }
+
+         #ListBox1 {
+            margin: auto auto 43px 6px;
+            border-radius: 5px;
         }
         table{
             text-align: center;
@@ -91,7 +138,7 @@
                 </th>
                     </tr>
             </table>
-            <asp:Button ID="Button1" runat="server" Text="Back" OnClick="Button1_Click" />
+              <button id="Button1" runat="server" onserverclick="Button1_Click" ><i class="fa fa-mail-reply">   Back</i></button>    
             <asp:Button ID="Button2" float="right" runat="server" Text="Logout" OnClick="Button2_Click" />
         </div>
         
