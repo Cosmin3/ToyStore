@@ -16,7 +16,10 @@
         }
         .topButton{
             float: right;
-
+      
+        }
+        #Button2{
+            float:right;
         }
     </style>
 </head>
@@ -27,7 +30,9 @@
             <p> <asp:Label ID="Label4" runat="server" Text="Welcome: "></asp:Label>
                 
             </p>
-            <p><asp:Button ID="Button6" class="topButton" runat="server" Text="Cart" OnClick="Button6_Click" />
+            <p>
+                <asp:Button ID="Button2" runat="server" Text="notifications" OnClick="Button2_Click" />
+                <asp:Button ID="Button6" class="topButton" runat="server" Text="Cart" OnClick="Button6_Click" />
                 </p>
              <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             <p>

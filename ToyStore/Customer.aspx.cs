@@ -150,5 +150,10 @@ namespace ToyStore
             TextBox2.Text = "";
             TextBox3.Text = "";
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CustomerNotification.aspx");
+        }
     }
 }

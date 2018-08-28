@@ -8,10 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace ToyStore
 {
-    public partial class EmployeeOrderNegociate : System.Web.UI.Page
+    public partial class CustomerNotification : System.Web.UI.Page
     {
         WebService1 web = new WebService1();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -30,7 +30,7 @@ namespace ToyStore
             TextBox1.Enabled = false;
             TextBox2.Enabled = false;
             TextBox3.Enabled = false;
-            TextBox4.Enabled = false;              
+            TextBox4.Enabled = false;
             Button3.Visible = false;
             Button4.Visible = false;
         }
@@ -41,7 +41,7 @@ namespace ToyStore
             TextBox2.Text = Convert.ToString(product[2]);
             TextBox3.Text = Convert.ToString(product[3]);
             TextBox4.Text = Convert.ToString(product[1]);
-            if(!Button4.Visible)
+            if (!Button4.Visible)
                 Button1.Visible = true;
         }
 
@@ -65,7 +65,7 @@ namespace ToyStore
         {
 
 
-           
+
             int i;
             if (!int.TryParse(TextBox3.Text, out i))
             {
@@ -86,41 +86,43 @@ namespace ToyStore
                     initButtons();
                     Button1.Visible = true;
                     Button5.Text = "Finish";
-                    if ( web.updateOrderDetail(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(TextBox1.Text)), Convert.ToInt32(TextBox3.Text), Convert.ToDouble(TextBox2.Text)))
-                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Product changed" + "');", true);
-                   else
+                    if (web.updateOrderDetail(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(TextBox1.Text)), Convert.ToInt32(TextBox3.Text), Convert.ToDouble(TextBox2.Text)))
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Offer sent to the employee" + "');", true);
+                    else
                         ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Error" + "');", true);
                 }
             }
         }
         protected void Button5_Click(object sender, EventArgs e)
         {
-            
-            if(Button5.Text == "Finish")
+
+            if (Button5.Text == "Finish")
             {
-               if(web.EmpToCustOffer(Convert.ToString(Session["Order"])))
-               {
+                if (web.CustToEmployeeOffer(Convert.ToString(Session["Order"])))
+                {
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Renegociere trimisa clientului" + "');", true);
-                    Response.Redirect("EmpPendingOrders.aspx");
-               }
-               else
+                    Response.Redirect("Customer.aspx");
+                }
+                else
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Eroare" + "');", true);
             }
             else
-                Response.Redirect("EmpPendingOrders.aspx");
+                Response.Redirect("Customer.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            foreach(ListItem product in ListBox1.Items)
+            foreach (ListItem product in ListBox1.Items)
             {
-               ArrayList arrayList = web.getOrderProductDetails(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(product.Text)));
-               if( web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3])))
-               {
+                ArrayList arrayList = web.getOrderProductDetails(Convert.ToInt32(Session["Order"]), Convert.ToString(web.GetProductsCode2(product.Text)));
+                if (web.acceptOrderDetails(web.GetProductsCode2(product.Text), Convert.ToInt32(arrayList[1]) - Convert.ToInt32(arrayList[3])) && web.acceptOrder(Convert.ToString(Session["Order"]))&& web.OrderPayment(Convert.ToDouble(Session["cost"]),Convert.ToInt32(Session["customernr"])))
+                {
+
+                    Session["Order"] = 0;
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Oferta acceptata" + "');", true);
-                    Response.Redirect("EmpPendingOrders.aspx");
-               }
-               else
+                    Response.Redirect("Customer.aspx");
+                }
+                else
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Eroare" + "');", true);
             }
         }
