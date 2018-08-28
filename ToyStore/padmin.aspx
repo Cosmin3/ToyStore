@@ -176,11 +176,9 @@
             </asp:DropDownList>
             <asp:DropDownList ID="DropDownList3" runat="server" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" Style="margin-left: 21px"></asp:DropDownList>
 
-
-            <button id="Button3" runat="server" onserverclick="Button3_Click"><i class="fa fa-search">Search</i></button>
-
-            <button id="Button1" runat="server" onserverclick="Button1_Click"><i class="fa fa-plus">Add</i></button>
-            <button id="Button2" runat="server" onserverclick="Button2_Click" onclientclick="return confirm('Are you sure?')" style="margin-left: 19px"><i class="fa fa-trash">Remove</i></button>
+            <button id="Button3" runat="server" onserverclick="Button3_Click"><i class="fa fa-search">  Search</i></button>
+            <button id="Button1" runat="server" onserverclick="Button1_Click"><i class="fa fa-plus">  Add</i></button>
+            <button id="Button2" runat="server" onserverclick="Button2_Click" onclientclick="return confirm('Are you sure?')" style="margin-left: 19px"><i class="fa fa-trash">  Remove</i></button>
 
         </p>
         <p>
