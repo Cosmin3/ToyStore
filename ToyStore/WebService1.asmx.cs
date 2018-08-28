@@ -1177,5 +1177,30 @@ namespace ToyStore
                 return false;
             }
         }
+
+        [WebMethod]
+        public double TotalOrderCost(int orderNumber)
+        {
+            double cost = 0;
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "Select priceEach as price, QuantityOrdered as quant From OrderDetails where orderNumber="+orderNumber;
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                cost = cost + (Convert.ToDouble(reader["price"]) * Convert.ToDouble(reader["quant"]));
+            }
+
+            reader.Close();
+            connection.Close();
+
+
+
+
+            return cost;
+        }
     }
+
+    
 }

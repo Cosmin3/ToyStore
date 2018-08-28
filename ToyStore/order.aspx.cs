@@ -58,5 +58,10 @@ namespace ToyStore
         {
             Response.Redirect("Customer.aspx");
         }
+
+        protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
