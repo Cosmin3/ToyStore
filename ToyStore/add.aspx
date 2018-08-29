@@ -98,7 +98,7 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
-            margin-left: 110px;
+            margin-left: 50px;
         }
 
     </style>

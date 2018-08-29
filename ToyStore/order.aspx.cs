@@ -47,6 +47,8 @@ namespace ToyStore
 
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Order sent to employee" + "');", true);
                     Response.Redirect("Customer.aspx");
+                    ListBox1.Items.Clear();
+                    Session["ordernr"] = 0;
                     
                 }
                 else

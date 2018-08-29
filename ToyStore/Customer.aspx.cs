@@ -143,7 +143,7 @@ namespace ToyStore
                         ts.Add(Convert.ToInt32(TextBox2.Text));
                         ts.Add(Convert.ToDouble(TextBox3.Text));
                         Session["ordernr"] = web.addOrder(ts, cat);
-                        a++;
+                        a= Convert.ToInt32(Session["nrcart"])+1;
                         Session["nrcart"] = a;
                     }
                 }
