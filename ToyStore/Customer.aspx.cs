@@ -10,11 +10,13 @@ namespace ToyStore
 {
     public partial class Customer : System.Web.UI.Page
     {
+        //<span id="spanNote" class="badge" style="visibility: visible" >2</span>
         int a;
         bool cat;
         WebService1 web = new WebService1();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
                 Response.Redirect("productDetails.aspx");
@@ -31,6 +33,7 @@ namespace ToyStore
                 this.Label4.Text = "Welcome: " + array[1];
                 this.refresh();
             }
+            
         }
         private void refresh()
         {
@@ -140,11 +143,8 @@ namespace ToyStore
                         ts.Add(Convert.ToInt32(TextBox2.Text));
                         ts.Add(Convert.ToDouble(TextBox3.Text));
                         Session["ordernr"] = web.addOrder(ts, cat);
-                        a++;
+                        a= Convert.ToInt32(Session["nrcart"])+1;
                         Session["nrcart"] = a;
-                       // HtmlGenericControl spanNote = (HtmlGenericControl)UpdateProgress1.FindControl("spanNote");
-                        //spanNote.InnerHTML = Session["nrcart"];
-
                     }
                 }
             }
@@ -154,6 +154,13 @@ namespace ToyStore
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Product added to cart" + "');", true);
                 Session["sameorder"] = Session["CustomerNr"];
 
+                if ( Convert.ToInt32(Session["nrcart"])!=0 )
+                {
+                    
+                    ButtonNote.Visible = true;
+                    ButtonNote.Text = Convert.ToString(Session["nrcart"]);
+
+                }
 
                 
             }

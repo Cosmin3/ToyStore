@@ -199,15 +199,29 @@
                 box-shadow:none;
             }
 
-            .Button7 .badge {
+            #ButtonNote {
                 position: absolute;
-                top: -10px;
-                right: -10px;
-                padding: 5px 10px;
-                border-radius: 50%;
+                border-radius: 12px;
                 background-color: red;
                 color: white;
+                border: 2px solid red;
             }
+        .auto-style1 {
+            left: 67px;
+            top: 502px;
+        }
+        .auto-style2 {
+            background-color: DodgerBlue;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            color: white;
+            text-decoration: none;
+            padding: 15px 26px;
+            position: relative;
+            display: inline-block;
+            border-radius: 5px;
+            left: -1px;
+            top: 8px;
+        }
     </style>
 
 </head>
@@ -220,6 +234,11 @@
         <p>
             <button id="Button2" runat="server"><span>Click</span></button>
             /*onserverclick="Button2_Click"*/
+                
+
+        <asp:Button ID="ButtonNote" runat="server" Text="10" CssClass="auto-style1" />
+        
+
         </p>
         <asp:Button ID="Button3" runat="server" Text="Button" />
         <p>
@@ -230,7 +249,7 @@
         <p>
             <button id="Button6" runat="server"><i class="fa fa-save">Save</i> </button>
         </p>
-        <button  id="Button7" class="Button7" runat="server"><span><i class="fa fa-save">Save</i></span><span class="badge">6</span></button>
+        <button  id="Button7" class="auto-style2" runat="server"><span><i class="fa fa-save">Save</i></span></button>
         
 
         <p>
