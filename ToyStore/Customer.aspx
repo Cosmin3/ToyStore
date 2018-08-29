@@ -215,7 +215,7 @@
                 
             </button>
 
-            <asp:Button ID="ButtonNote" runat="server"  CssClass="auto-style2"  Visible="false"/>
+            <asp:Button id="ButtonNote" runat="server"  CssClass="auto-style2"  Visible="false"/>
 
             <asp:Button ID="Button2" runat="server" Text="Notifications" OnClick="Button2_Click" />
             <p>
