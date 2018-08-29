@@ -32,7 +32,28 @@
                 color: black;
                 box-shadow: none;
             }
+            #Button2 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            margin-left: 1065px;
+            margin-top: 11px;
+            margin-bottom: 0px;
+        }
 
+            #Button2:active:hover {
+                background-color: RoyalBlue;
+                border-radius: 12px;
+                color: black;
+                box-shadow: none;
+            }
         #Button3 {
             border-style: none;
             border-color: inherit;
@@ -176,10 +197,10 @@
             </p>
             <button id="Button6" class="Button6" runat="server" onserverclick="Button6_Click">
                 <span><i class="fa fa-shopping-cart">  Cart</i></span>
-                <span id="spanNote" class="badge" style="visibility: visible" >2</span>
+                <span id="spanNote" class="badge" style="visibility: hidden" hidden="hidden" >0</span>
 
             </button>
-
+            <asp:Button ID="Button2" runat="server" Text="Notifications" OnClick="Button2_Click" />
             <p>
                 <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label>
             </p>
