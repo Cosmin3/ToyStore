@@ -16,8 +16,11 @@ namespace ToyStore
         {
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
-                if(Convert.ToString(Session["State"] )== "Pending")
-                    Response.Redirect("EmployeeOrderNegociate.aspx");
+                if (Convert.ToInt32(Session["EmployeeLevel"]) == 3)
+                {
+                    if (Convert.ToString(Session["State"]) == "Pending")
+                        Response.Redirect("EmployeeOrderNegociate.aspx");
+                }
             }
             ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
             if (!Page.IsPostBack)
@@ -47,24 +50,28 @@ namespace ToyStore
         {
 
 
-            string a = Convert.ToString(ListBox1.SelectedItem.Text);
-            bool ok = true;
-            string b = "", c="";
-            for (int i = 0; i < a.Length && ok; i++)
+            if (Convert.ToInt32(Session["EmployeeLevel"]) == 3)
             {
-                if (a[i + 1] == ':')
-                    ok = false;
-                b = b + a[i];
+                string a = Convert.ToString(ListBox1.SelectedItem.Text);
+                bool ok = true;
+                string b = "", c = "";
+                for (int i = 0; i < a.Length && ok; i++)
+                {
+                    if (a[i + 1] == ':')
+                        ok = false;
+                    b = b + a[i];
+                }
+                ok = true;
+                for (int i = a.Length - 1; i > 0 && ok; i--)
+                {
+                    if (a[i - 1] == ' ' && a[i - 2] == ':')
+                        ok = false;
+                    c = a[i] + c;
+                }
+
+                Session["State"] = c;
+                Session["Order"] = b;
             }
-            ok = true;
-            for (int i = a.Length - 1; i > 0 && ok; i--)
-            {
-                if (a[i - 1] == ' ' && a[i - 2] == ':')
-                    ok = false;
-                c = a[i] + c;
-            }
-            Session["State"] = c;
-            Session["Order"] = b;
         }
 
         protected void Button2_Click(object sender, EventArgs e)

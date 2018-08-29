@@ -26,6 +26,7 @@ namespace ToyStore
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " Esti logat" + "');", true);
                     Session["CustomerNr"] = TextBox2.Text;
                     Session["loggedUser"] = "customer";
+
                     Response.Redirect("Customer.aspx");
                 }
                 else
@@ -38,6 +39,7 @@ namespace ToyStore
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + " ESTI logat" + "');", true);
                     Session["LoggedUser"] = TextBox2.Text;
                     Session["UserName"] = TextBox1.Text;
+                    Session["EmployeeLevel"] = web.getEmployeeLevel(Convert.ToInt32(TextBox2.Text));
                     Response.Redirect("productsEmployee.aspx");
                 }
                     

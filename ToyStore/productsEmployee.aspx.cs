@@ -15,12 +15,15 @@ namespace ToyStore
         {
             if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "event 1")
             {
+
                 Response.Redirect("modify.aspx");
             }
             ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "event 1"));
 
             if (!Page.IsPostBack)
             {
+                if (Convert.ToInt32(Session["EmployeeLevel"]) != 3)
+                    Button6.Visible = false;
                 this.Label4.Text = "Welcome: " + Session["UserName"];
                 this.refresh();
             }
