@@ -75,11 +75,139 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="add.aspx" />
+    <Content Include="Customer.aspx" />
+    <Content Include="CustomerNotification.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmpCustDet.aspx" />
+    <Content Include="EmployeeCust.aspx" />
+    <Content Include="EmployeeOrderNegociate.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmpPendingOrders.aspx" />
+    <Content Include="forDesign.aspx" />
+    <Content Include="modify.aspx" />
+    <Content Include="order.aspx" />
+    <Content Include="productDetails.aspx" />
+    <Content Include="productsEmployee.aspx" />
+    <Content Include="StartPage.aspx" />
     <Content Include="Web.config" />
+    <Content Include="padmin.aspx" />
+    <Content Include="pcustomer.aspx" />
     <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="add.aspx.cs">
+      <DependentUpon>add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="add.aspx.designer.cs">
+      <DependentUpon>add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.aspx.cs">
+      <DependentUpon>Customer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer.aspx.designer.cs">
+      <DependentUpon>Customer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerNotification.aspx.cs">
+      <DependentUpon>CustomerNotification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="CustomerNotification.aspx.designer.cs">
+      <DependentUpon>CustomerNotification.aspx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="EmpCustDet.aspx.cs">
+      <DependentUpon>EmpCustDet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpCustDet.aspx.designer.cs">
+      <DependentUpon>EmpCustDet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeCust.aspx.cs">
+      <DependentUpon>EmployeeCust.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeCust.aspx.designer.cs">
+      <DependentUpon>EmployeeCust.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeOrderNegociate.aspx.cs">
+      <DependentUpon>EmployeeOrderNegociate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="EmployeeOrderNegociate.aspx.designer.cs">
+      <DependentUpon>EmployeeOrderNegociate.aspx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="EmpPendingOrders.aspx.cs">
+      <DependentUpon>EmpPendingOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpPendingOrders.aspx.designer.cs">
+      <DependentUpon>EmpPendingOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forDesign.aspx.cs">
+      <DependentUpon>forDesign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forDesign.aspx.designer.cs">
+      <DependentUpon>forDesign.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modify.aspx.cs">
+      <DependentUpon>modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modify.aspx.designer.cs">
+      <DependentUpon>modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="order.aspx.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="order.aspx.designer.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productDetails.aspx.cs">
+      <DependentUpon>productDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productDetails.aspx.designer.cs">
+      <DependentUpon>productDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productsEmployee.aspx.cs">
+      <DependentUpon>productsEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productsEmployee.aspx.designer.cs">
+      <DependentUpon>productsEmployee.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartPage.aspx.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StartPage.aspx.designer.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="padmin.aspx.cs">
+      <DependentUpon>padmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="padmin.aspx.designer.cs">
+      <DependentUpon>padmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pcustomer.aspx.cs">
+      <DependentUpon>pcustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pcustomer.aspx.designer.cs">
+      <DependentUpon>pcustomer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>
